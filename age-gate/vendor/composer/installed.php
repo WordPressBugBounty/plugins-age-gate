@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'asylum/wp-plugin-boilerplate',
-        'pretty_version' => '3.5.0',
-        'version' => '3.5.0.0',
-        'reference' => 'a220045e337e884f9af52880802a39f2ec7f12f8',
+        'pretty_version' => '3.5.1',
+        'version' => '3.5.1.0',
+        'reference' => 'ea155d33a4009fccefdb900c26cad7d3872bbf55',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -75,9 +75,9 @@
             'dev_requirement' => false,
         ),
         'asylum/wp-plugin-boilerplate' => array(
-            'pretty_version' => '3.5.0',
-            'version' => '3.5.0.0',
-            'reference' => 'a220045e337e884f9af52880802a39f2ec7f12f8',
+            'pretty_version' => '3.5.1',
+            'version' => '3.5.1.0',
+            'reference' => 'ea155d33a4009fccefdb900c26cad7d3872bbf55',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

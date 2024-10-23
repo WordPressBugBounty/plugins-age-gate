@@ -16,7 +16,8 @@ class Customizer extends Integration
     {
         if ($this->exists()) {
             $settings = Settings::getInstance();
-            $settings->isBuilder = true;
+            $settings->set('isBuilder', true);
+            // $settings->isBuilder = true;
         }
     }
 }

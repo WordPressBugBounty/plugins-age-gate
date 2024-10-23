@@ -16,7 +16,7 @@ class Elementor extends Integration
     {
         if ($this->exists()) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode()) {
-                Settings::getInstance()->isBuilder = true;
+                Settings::getInstance()->set('isBuilder', true);
             }
             // add_filter('age_gate/restricted', '__return_false');
         }
