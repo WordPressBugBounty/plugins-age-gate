@@ -11,6 +11,11 @@ class Update
         add_filter( 'auto_update_plugin', [$this, 'autoUpdates'], 10, 2);
     }
 
+    /**
+     * Check for version changes
+     *
+     * @return void
+     */
     public function updateCheck()
     {
         if (AGE_GATE_VERSION !== get_option('age_gate_version')) {
@@ -18,10 +23,17 @@ class Update
         }
     }
 
+    /**
+     * Disable auto updates
+     *
+     * @param mixed $value
+     * @param object $item
+     * @return mixed
+     */
     public function autoUpdates($value, $item)
     {
         if ($item->slug === 'age-gate') {
-            return false;
+            return apply_filters('age_gate/auto_update_plugin', null);
         }
 
         return $value;
