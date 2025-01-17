@@ -18,6 +18,7 @@ class Title
 
         if ($settings->method !== 'js' && $settings->switchTitle) {
             add_filter('wpseo_title', [$this, 'returnPageTitle'], 1000, 1);
+            add_filter('rank_math/frontend/title', [$this, 'returnPageTitle'], 1000, 1);
             add_filter('document_title_parts', [$this, 'changePageTitle'], 1000, 1);
             add_filter('wp_title', [$this, 'changeDefaultTitle'], 10, 3);
         }
@@ -67,7 +68,7 @@ class Title
     }
 
     /**
-     * Change the parts sent to Yoast
+     * Change the parts sent to Yoast or Think Math
      *
      * @return void
      */
@@ -79,4 +80,5 @@ class Title
 
         return $title;
     }
+
 }

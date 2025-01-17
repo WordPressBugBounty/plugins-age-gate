@@ -215,7 +215,9 @@ const noRechallenge = (event) => {
 
     if (
         rechallenge === '' && getStore(`${cookieName}_failed`)
+        || rechallenge === false && getStore(`${cookieName}_failed`)
         || rechallenge === '' && type === 'age_gate_failed'
+        || rechallenge === false && type === 'age_gate_failed'
     ) {
 
         Array.from(document.querySelectorAll('.age-gate__fields, .age-gate-fields, .age-gate__remember-wrapper, .age-gate-remember-wrapper, .age-gate__extra, .age-gate-extra, .age-gate__submit, .age-gate-submit')).forEach(el => el.parentNode.removeChild(el));
