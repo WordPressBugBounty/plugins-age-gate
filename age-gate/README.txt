@@ -1,11 +1,11 @@
 === Age Gate ===
 Contributors: philsbury
-Tags: age, age verification, age gate, adult, age restriction, age verify, adults-only, modal, over 16, over 18, over 19, over 20, over 21, pop-up, popup, restrict, splash, beer, alcohol, tobacco, vape, restriction
+Tags: age verification, age gate, adults-only, age restriction, age verify
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40wordpressagegate%2ecom&lc=GB&item_name=Age%20Gate&item_number=Age%20Gate%20Donation&no_note=0&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Requires at least: 6.0.0
 Requires PHP: 7.4
-Tested up to: 6.7.1
-Stable tag: 3.5.3
+Tested up to: 6.7.2
+Stable tag: 3.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,10 @@ From version 1.4.0 those using caching can select the "Cache Bypass" option to a
 6. Manage what users can change Age Gate's setting, restrict posts and exclude settings from certain post types.
 
 == Changelog ==
+
+= 3.5.4 =
+* Security - Fixed Path Traversal in REST API.
+* Fixed - Logo image missing width and height attributes
 
 = 3.5.3 =
 * Fixed - No rechallenging when using munged options

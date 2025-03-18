@@ -19,7 +19,7 @@ return array(
     'League\\HTMLToMarkdown\\' => array($vendorDir . '/league/html-to-markdown/src'),
     'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
     'Jawira\\CaseConverter\\' => array($vendorDir . '/jawira/case-converter/src'),
-    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/macroable', $vendorDir . '/illuminate/collections'),
+    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/macroable'),
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
     'CaseConverter\\' => array($vendorDir . '/joachim-n/case-converter'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),

@@ -33,6 +33,7 @@ class Submit
         'm' => 'sanitize_numbers|pad,2,0',
         'y' => 'sanitize_numbers',
         'age' => 'decode_age',
+        'lang' => 'sanitize_file_name',
     ];
 
     private $inputType = null;

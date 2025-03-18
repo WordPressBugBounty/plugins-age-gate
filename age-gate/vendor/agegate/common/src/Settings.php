@@ -24,7 +24,7 @@ class Settings
     private function __construct()
     {
         $this->parsedown = new Parsedown();
-        $this->currentLanguage = $_REQUEST['age_gate']['lang'] ?? Language::getInstance()->getLanguage();
+        $this->currentLanguage = !empty($_REQUEST['age_gate']['lang']) ? sanitize_file_name($_REQUEST['age_gate']['lang']) : Language::getInstance()->getLanguage();
         // $this->data['language'] = $this->currentLanguage;
 
         // dump(Constants::AGE_GATE_OPTIONS);
@@ -67,11 +67,26 @@ class Settings
         $data['rememberTime'] = $data['rememberLength']['remember_time'] ?? 365;
         $data['rememberLength'] = $data['rememberLength']['remember_length'] ?? 'days';
 
-        $data['logoId'] = apply_filters('age_gate/logo/id', $data['logo'] ?? null);
+        $data['logoId'] = (int) apply_filters('age_gate/logo/id', $data['logo'] ?? null);
+
+        $imageMeta = wp_get_attachment_metadata($data['logoId']) ?: [];
 
         $data['logo'] = apply_filters(
             'age_gate/logo/src',
             wp_get_attachment_url($data['logoId'])
+        );
+
+        $data['logoWidth'] = (int) apply_filters(
+            'age_gate/logo/width',
+            $imageMeta['width'] ?? 0
+        );
+        $data['logoHeight'] = apply_filters(
+            'age_gate/logo/height',
+            $imageMeta['height'] ?? 0
+        );
+        $data['logoAlt'] = apply_filters(
+            'age_gate/logo/alt',
+            get_post_meta($data['logoId'], '_wp_attachment_image_alt', true ) ?: '',
         );
 
         $data['backgroundImageId'] = $data['backgroundImage'] ?? false;

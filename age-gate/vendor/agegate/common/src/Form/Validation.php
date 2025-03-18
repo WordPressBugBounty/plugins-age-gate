@@ -27,6 +27,11 @@ class Validation extends Validator
         return min($value, $params[0]);
     }
 
+    protected function filter_sanitize_file_name($value)
+    {
+        return sanitize_file_name($value);
+    }
+
     protected function validate_nonce($field, array $input, array $param = [], $value = null)
     {
         return wp_verify_nonce($value, 'age_gate_form');
