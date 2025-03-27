@@ -17,13 +17,15 @@ class Ajax
 
     public function removeLegacyCss()
     {
+        $postData = wp_unslash($_POST ?? []);
+
         $data = [];
-        if (!current_user_can(Constants::ADVANCED) || !wp_verify_nonce($_POST['nonce'], 'ag_clear_css' )) {
+        if (!current_user_can(Constants::ADVANCED) || !wp_verify_nonce($postData['nonce'], 'ag_clear_css' )) {
             $data['status'] = 'Not allowed';
             $code = 401;
         } else {
             delete_option('age_gate_legacy_css');
-            Notice::add(__('Legacy CSS removed'), 'success');
+            Notice::add(__('Legacy CSS removed', 'age-gate'), 'success');
             $data['status'] = 'ok';
             $code = 200;
         }
@@ -34,17 +36,19 @@ class Ajax
 
     public function storeTerms()
     {
-        if (!current_user_can( Constants::CONTENT)) {
+        $postData = wp_unslash($_POST ?? []);
+
+        if (!current_user_can( Constants::CONTENT) || !wp_verify_nonce($postData['nonce'], 'age_gate_store_terms')) {
             wp_send_json_error( [], 401);
         }
 
         $options = get_option(ContentController::OPTION, []);
 
-        if ($_POST['idx'] == 0) {
+        if ($postData['idx'] == 0) {
             $options['terms'] = [];
         }
 
-        $options['terms'] = array_merge($options['terms'] ?? [], $_POST['ag_settings'] ?? []);
+        $options['terms'] = array_merge($options['terms'] ?? [], $postData['ag_settings'] ?? []);
 
         update_option(ContentController::OPTION, $options);
 

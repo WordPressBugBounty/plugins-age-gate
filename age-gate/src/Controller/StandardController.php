@@ -19,15 +19,17 @@ class StandardController extends AbstractController implements ControllerInterfa
     {
         parent::__construct($c);
 
-        if (isset($_POST['age_gate'])) {
-            $response = (new Submit($_POST, $this->settings))->validate();
+        $postData = wp_unslash($_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+        if (isset($postData['age_gate'])) {
+            $response = (new Submit($postData, $this->settings))->validate();
 
             if ($response['status'] === true) {
 
                 if ($response['set_cookie']) {
                     Cookie::set($this->settings->getCookieName(), $response['data']['user_age'], $response['cookieLength'] ?? 0);
 
-                    if ($_COOKIE[$this->settings->getCookieName() . '_failed'] ?? false) {
+                    if (filter_var(wp_unslash($_COOKIE[$this->settings->getCookieName() . '_failed']  ?? false, FILTER_VALIDATE_BOOLEAN))) {
                         Cookie::destroy($this->settings->getCookieName() . '_failed');
                     }
                 } else {

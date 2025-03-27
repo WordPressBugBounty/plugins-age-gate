@@ -5,12 +5,17 @@ const storeItems = async (items, nonce = null, idx = 0) => {
 
     console.log(idx);
 
+    if (!nonce) {
+        nonce = ag_content_params.nonce;
+    }
+
     const { ajaxurl } = window;
 
     const data = new FormData;
 
     data.append('action', 'age_gate_store_terms');
     data.append('idx', idx);
+    data.append('nonce', nonce);
 
     for (const [key, value] of Object.entries(items[0])) {
         data.append(`ag_settings[${key}]`, value);
@@ -29,6 +34,7 @@ const storeItems = async (items, nonce = null, idx = 0) => {
             )
         ).json();
     } catch (e) {
+
         return false;
     }
 

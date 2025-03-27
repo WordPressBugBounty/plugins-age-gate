@@ -1,17 +1,17 @@
 <?php $this->layout('layouts/' . $settings->method);?>
 <?php //$this->layout('layouts/standard');?>
 
-<div <?php echo $this->attr('age-gate-wrapper'); ?>>
+<div <?php echo $this->attr('age-gate-wrapper'); ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
     <?php if ($settings->method === 'js') : ?>
         <?php $this->insert('theme::partials/decoration/loader'); ?>
     <?php endif; ?>
-    <div <?php echo $this->attr('age-gate-background-colour'); ?>></div>
-    <div <?php echo $this->attr('age-gate-background'); ?>>
+    <div <?php echo $this->attr('age-gate-background-colour'); ?>></div><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+    <div <?php echo $this->attr('age-gate-background'); ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
         <?php do_action('age_gate/form/background', $settings->backgroundImage) ?>
     </div>
     <?php do_action('age_gate/before'); ?>
 
-    <div <?php echo $this->attr('age-gate'); ?>>
+    <div <?php echo $this->attr('age-gate'); ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
     <?php
         do_action('age_gate/form/before');
 

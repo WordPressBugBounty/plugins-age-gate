@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donat
 Requires at least: 6.0.0
 Requires PHP: 7.4
 Tested up to: 6.7.2
-Stable tag: 3.5.4
+Stable tag: 3.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,13 @@ From version 1.4.0 those using caching can select the "Cache Bypass" option to a
 6. Manage what users can change Age Gate's setting, restrict posts and exclude settings from certain post types.
 
 == Changelog ==
+
+= 3.6.0 =
+* Security - Removed developer settings endpoint.
+* Removed - unused media rest route
+* Fixed - Missing nonce field on terms content
+* Fixed - Missing sanitation
+
 
 = 3.5.4 =
 * Security - Fixed Path Traversal in REST API.

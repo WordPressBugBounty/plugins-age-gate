@@ -46,22 +46,23 @@ class Admin
 
     public function notices()
     {
-        global $pagenow;
+        global $pagenow, $plugin_page;
         // $req = wp_remote_get(rest_url('/age-gate/v3/check'), [
         //     'sslverify' => false
         // ]);
 
-        if (!is_php_version_compatible('7.4') && strpos(sanitize_text_field($_GET['page'] ?? ''), 'age-gate') !== false) {
+        if (!is_php_version_compatible('7.4') && strpos(sanitize_text_field($plugin_page ?: ''), 'age-gate') !== false) {
              echo '<div id="message" class="notice notice-error"><p>' . esc_html__('Age Gate requires a minimum PHP version of 7.4 which your system does not have. You may experience some issues.', 'age-gate') . '</p></div>';
         }
 
-        // if (wp_remote_retrieve_response_code($req) !== 200 && current_user_can(Constants::RESTRICTIONS) && strpos(sanitize_text_field($_GET['page'] ?? ''), 'age-gate-advanced') !== false) {
+        // if (wp_remote_retrieve_response_code($req) !== 200 && current_user_can(Constants::RESTRICTIONS) && strpos(sanitize_text_field($plugin_page ?: ''), 'age-gate-advanced') !== false) {
         //     echo '<div id="ag-api-error" class="notice notice-error is-dismissible"><p>' . esc_html__('Age Gate is having trouble contacting the Wordpress REST API. Is something blocking it?', 'age-gate') . '</p></div>';
         // }
 
         // is it an age gate page?
-        if ($pagenow === 'admin.php' && isset($_GET['m']) && strpos((sanitize_text_field($_GET['page'] ?? '')), 'age-gate') === 0) {
-            switch ((int) $_GET['m']) {
+        // TODO: replace with notice class. Why is it like this?
+        if ($pagenow === 'admin.php' && isset($_GET['m']) && strpos((sanitize_text_field($plugin_page ?: '')), 'age-gate') === 0) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            switch ((int) $_GET['m']) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 case 1:
                     $status = 'success';
                     $message = esc_html__('Settings saved', 'age-gate');
@@ -72,24 +73,6 @@ class Admin
                     break;
             }
             echo sprintf('<div class="notice notice-%s"><p>%s</p></div>', esc_attr($status), esc_html($message));
-        }
-
-        if (Settings::getInstance()->devWarning && current_user_can(Constants::TOOLS)) {
-
-            $data = get_plugin_data(AGE_GATE_PATH . 'age-gate.php');
-
-            $dev = preg_split('/\-|\+/', $data['Version']);
-
-            if ($dev[1] ?? false) {
-                $pattern = sprintf('/(%s|%s)/', $dev[1], AGE_GATE_VERSION);
-                /* translators: %1$s: Sub version  number. %2$s: Full version number. */
-                $messageText = sprintf(__('You are using the %1$s version of Age Gate %2$s. This may not be suitable for production websites.', 'age-gate'), $dev[1], AGE_GATE_VERSION);
-                echo '<div id="message" class="notice notice-error"><p>' . preg_replace($pattern, '<b>$1</b>', esc_html($messageText)) . '</p></div>';
-            }
-        }
-
-        if (Settings::getInstance()->devEndpoint && current_user_can(Constants::TOOLS)) {
-            echo '<div id="message" class="notice notice-warning"><p>' . esc_html__('The developer endpoint is enabled. You should disable this unless you have an open support topic', 'age-gate') . '</p></div>';
         }
 
         if (Settings::getInstance()->disableAgeGate && current_user_can(Constants::TOOLS)) {
@@ -106,7 +89,8 @@ class Admin
 
             if ($data['Version'] ?? false) {
                 if (version_compare($data['Version'], '1.0.0', '<')) {
-                    echo '<div id="message" class="notice notice-error"><p>' . esc_html(sprintf(__('Your version of Age Gate User Registration (%s) is not compatible with Age Gate %s. Please download a supported version from our website', 'age-gate'), $data['Version'], AGE_GATE_VERSION)) . '</p></div>';
+                    /* translators: 1: Age Gate User Registration version. 2: Aga gate version */
+                    echo '<div id="message" class="notice notice-error"><p>' . esc_html(sprintf(__('Your version of Age Gate User Registration (%1$s) is not compatible with Age Gate %2$s. Please download a supported version from our website', 'age-gate'), $data['Version'], AGE_GATE_VERSION)) . '</p></div>';
                 }
             }
         }

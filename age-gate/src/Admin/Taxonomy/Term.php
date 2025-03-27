@@ -4,8 +4,9 @@ namespace AgeGate\Admin\Taxonomy;
 
 use AgeGate\Common\Content;
 use AgeGate\Common\Settings;
-use AgeGate\Common\Immutable\Constants;
+use Asylum\Validation\Validator;
 use Jawira\CaseConverter\Convert;
+use AgeGate\Common\Immutable\Constants;
 
 class Term
 {
@@ -49,16 +50,20 @@ class Term
                 return;
             }
 
-            $id = ($_GET['tag_ID'] ?? null) ? (int) $_GET['tag_ID'] : null;
+            global $tag;
 
-            echo $this->view->addData([
+            $id = ($tag) ? (int) $tag->term_id : null;
+
+            $viewData = [
                 'content' => new Content($id, 'term'),
                 'action' => strpos(current_action(), 'edit') !== false ? 'edit' : 'add',
                 'settings' => $settings,
                 'setRestriction' => current_user_can(Constants::SET_CONTENT),
                 'setAge' => current_user_can(Constants::SET_CUSTOM_AGE),
                 'contentOption' => $this->settings->type === 'selected' ? Constants::META_RESTRICT : Constants::META_BYPASS,
-            ])->render('term/meta-options');
+            ];
+
+            echo $this->view->addData($viewData)->render('term/meta-options'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     }
 
@@ -69,18 +74,20 @@ class Term
         }
 
         // check nonce
-        if (!wp_verify_nonce($_POST['_agn'] ?? '', 'age_gate_post_edit')) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_agn'] ?? '')), 'age_gate_post_edit')) {
             return;
         }
 
+        $validator = new Validator;
         $content = new Content($id, 'term');
+        $postData = $validator->sanitize(wp_unslash($_POST['ag_settings'] ?? [])); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
         // mutli ages?
         if ($this->settings->multiAge && current_user_can(Constants::SET_CUSTOM_AGE)) {
             $default = $this->settings->{$content->getLanguage()}['defaultAge'] ?? $this->settings->defaultAge;
 
-            if ($_POST['ag_settings']['age'] ?? false) {
-                $age = (int) $_POST['ag_settings']['age'];
+            if ( $postData['age'] ?? false) {
+                $age = (int) wp_unslash( $postData['age']);
 
                 if ($age === $default) {
                     // remove the meta as we don't need it
@@ -94,7 +101,7 @@ class Term
 
         // bypass ?
         if ($this->settings->type === 'all' && current_user_can(Constants::SET_CONTENT)) {
-            if ($_POST['ag_settings']['bypass'] ?? false) {
+            if ( $postData['bypass'] ?? false) {
                 // add new meta key
                 update_term_meta($id, Constants::META_BYPASS, 1);
             } else {
@@ -105,7 +112,7 @@ class Term
 
         // restrict
         if ($this->settings->type === 'selected' && current_user_can(Constants::SET_CONTENT)) {
-            if ($_POST['ag_settings']['restrict'] ?? false) {
+            if ( $postData['restrict'] ?? false) {
                 // add new meta key
                 update_term_meta($id, Constants::META_RESTRICT, 1);
             } else {

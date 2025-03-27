@@ -42,8 +42,10 @@ class Toolbar extends AbstractController
     public function enqueue(): void
     {
         if (is_admin_bar_showing()) {
-            wp_enqueue_script('age-gate-toolbar', AGE_GATE_URL . 'dist/toolbar.js', [], AGE_GATE_VERSION, true);
-            wp_enqueue_style('age-gate-toolbar', AGE_GATE_URL . 'dist/toolbar.css', [], AGE_GATE_VERSION);
+            $settings = Settings::getInstance();
+            $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($settings->rawAssets ? '/raw' : ''));
+            wp_enqueue_script('age-gate-toolbar', $path . '/toolbar.js', [], AGE_GATE_VERSION, true);
+            wp_enqueue_style('age-gate-toolbar', $path . '/toolbar.css', [], AGE_GATE_VERSION);
         }
     }
 
@@ -55,7 +57,7 @@ class Toolbar extends AbstractController
 
 
         $settings = Settings::getInstance();
-        echo sprintf('<script>var ag_cookie_domain = "%s"; var ag_cookie_name = "%s"</script>', Cookie::getDomain(), $settings->getCookieName());
+        echo sprintf('<script>var ag_cookie_domain = "%s"; var ag_cookie_name = "%s"</script>', esc_attr(Cookie::getDomain()), esc_attr($settings->getCookieName())); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
         $parent = [
             'id' => 'age-gate',

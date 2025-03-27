@@ -8,7 +8,6 @@ class Update
     {
         add_action('init', [$this, 'updateCheck'], 1);
         add_action('in_plugin_update_message-age-gate/age-gate.php', [$this, 'updateWarnings']);
-        add_filter( 'auto_update_plugin', [$this, 'autoUpdates'], 10, 2);
     }
 
     /**
@@ -21,22 +20,6 @@ class Update
         if (AGE_GATE_VERSION !== get_option('age_gate_version')) {
             \AgeGate\Update\Activate::activate();
         }
-    }
-
-    /**
-     * Disable auto updates
-     *
-     * @param mixed $value
-     * @param object $item
-     * @return mixed
-     */
-    public function autoUpdates($value, $item)
-    {
-        if ($item->slug === 'age-gate') {
-            return apply_filters('age_gate/auto_update_plugin', null);
-        }
-
-        return $value;
     }
 
     public function updateWarnings($plugin)
@@ -66,11 +49,11 @@ class Update
         }
 
         if ($found) {
-            echo $this->getDevMessage();
+            echo wp_kses_post($this->getDevMessage());
             return;
         }
 
-        echo $this->$method();
+        echo wp_kses_post($this->$method());
     }
 
     private function getMagnitude($current, $new)

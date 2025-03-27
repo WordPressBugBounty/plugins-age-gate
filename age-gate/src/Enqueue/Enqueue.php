@@ -16,7 +16,7 @@ class Enqueue
     public function admin()
     {
         if (($GLOBALS['pagenow'] ?? false) === 'plugins.php') {
-            wp_enqueue_script('age-gate-update', AGE_GATE_URL . 'dist/update.js', [], AGE_GATE_VERSION);
+            wp_enqueue_script('age-gate-update', AGE_GATE_URL . 'dist/update.js', [], AGE_GATE_VERSION, true);
         }
 
         $pages = [
@@ -27,8 +27,12 @@ class Enqueue
             'term.php',
             'edit-tags.php',
         ];
+
+
+        global $plugin_page;
+
         if (
-            ($GLOBALS['pagenow'] ?? false) === 'admin.php' && strpos(($_GET['page'] ?? ''), 'age-gate') !== false
+            ($GLOBALS['pagenow'] ?? false) === 'admin.php' && strpos(($plugin_page ?: ''), 'age-gate') !== false
             || in_array(($GLOBALS['pagenow'] ?? false), $pages)) {
                 wp_enqueue_media();
                 wp_enqueue_style('age-gate-admin', AGE_GATE_URL . 'dist/admin.css', [], AGE_GATE_VERSION);
@@ -49,30 +53,32 @@ class Enqueue
     {
         $settings = Settings::getInstance();
 
-        wp_enqueue_script('age-gate-all', AGE_GATE_URL . 'dist/all.js', [], AGE_GATE_VERSION, true);
+        $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($settings->rawAssets ? '/raw' : ''));
+
+        wp_enqueue_script('age-gate-all', $path . '/all.js', [], AGE_GATE_VERSION, true);
 
         wp_localize_script( 'age-gate-all', 'age_gate_common', [
             'cookies' => $settings->labelNoCookies,
             'simple' => $settings->simplebar,
         ]);
 
-        wp_register_script('age-gate-shortcode', AGE_GATE_URL . 'dist/shortcode.js', [], AGE_GATE_VERSION, true);
+        wp_register_script('age-gate-shortcode', $path . '/shortcode.js', [], AGE_GATE_VERSION, true);
 
         if ($settings->enqueueCss) {
-            wp_register_style('age-gate', AGE_GATE_URL . 'dist/main.css', [], AGE_GATE_VERSION);
+            wp_register_style('age-gate', $path . '/main.css', [], AGE_GATE_VERSION);
         }
 
         if ($settings->inputAutoTab && !$settings->stepped) {
-            wp_enqueue_script('age-gate-autotab', AGE_GATE_URL . 'dist/autotab.js', [], AGE_GATE_VERSION, !$settings->inHeader);
+            wp_enqueue_script('age-gate-autotab', $path . '/autotab.js', [], AGE_GATE_VERSION, !$settings->inHeader);
         }
 
         if ($settings->simplebar) {
-            wp_enqueue_script('age-gate-simplebar', AGE_GATE_URL . 'dist/simplebar.js', [], AGE_GATE_VERSION, true);
+            wp_enqueue_script('age-gate-simplebar', $path . '/simplebar.js', [], AGE_GATE_VERSION, true);
         }
 
 
         if ($settings->stepped && $settings->inputType !== 'buttons') {
-            wp_enqueue_style('age-gate-stepped', AGE_GATE_URL . 'dist/stepped.css', [], AGE_GATE_VERSION);
+            wp_enqueue_style('age-gate-stepped', $path . '/stepped.css', [], AGE_GATE_VERSION);
             wp_enqueue_script('age-gate-stepped');
         }
 

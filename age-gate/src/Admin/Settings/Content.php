@@ -46,7 +46,7 @@ trait Content
 
                             ],
                             'label' => $postType->label,
-                            'sublabel' => __('ALPHA'),
+                            'sublabel' => __('ALPHA', 'age-gate'),
                         ]
                     ];
                 })->toArray(),
@@ -78,7 +78,7 @@ trait Content
                 'subtitle' => __('How Age Gate should handle certain error pages', 'age-gate'),
                 'fields' => [
                     'error_404' => [
-                        'label' => __('404 error'),
+                        'label' => __('404 error', 'age-gate'),
                         'subtext' => 'Show Age Gate on 404 error',
                         'type' => 'checkbox',
                         'default' => false,

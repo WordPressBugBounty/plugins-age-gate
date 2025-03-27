@@ -262,7 +262,7 @@ class Migrate
             $converter = new HtmlToMarkdown;
         }
 
-        return preg_replace('/(\[.*\])\(\"(.*)\"\)/', '$1($2)', stripslashes(strip_tags($converter->convert(html_entity_decode(html_entity_decode($value))))));
+        return preg_replace('/(\[.*\])\(\"(.*)\"\)/', '$1($2)', stripslashes(wp_strip_all_tags($converter->convert(html_entity_decode(html_entity_decode($value))))));
     }
 
     /**

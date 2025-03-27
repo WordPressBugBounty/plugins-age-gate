@@ -1,7 +1,7 @@
-<div <?php echo $this->attr('age-gate-loader') ?>>
+<div <?php echo $this->attr('age-gate-loader') ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
     <?php if ($settings->loaderImg) : ?>
         <?php $path = apply_filters('age_gate/loader/image', AGE_GATE_URL . 'dist/img/loader.svg'); ?>
-        <img src="<?php echo esc_url($path); ?>" alt="<?php echo esc_attr__('Loading', 'age-gate') ?>" />
+        <img src="<?php echo esc_url($path); ?>" alt="<?php echo esc_attr__('Loading', 'age-gate') ?>" /><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 
     <?php else : ?>
 

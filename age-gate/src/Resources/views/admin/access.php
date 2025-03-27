@@ -7,17 +7,21 @@
             <?php
                 switch ($key) {
                     case 'set_content':
+                        /* translators: Indivdual content label */
                         $label = __('Restrict/Bypass indiviual content', 'age-gate');
                         break;
                     case 'set_age':
+                        /* translators: Indivdual age label */
                         $label = __('Change age for indiviual content', 'age-gate');
                         break;
                     case 'reset':
                     case 'export':
                     case 'import':
+                        /* translators: Permission label. %s name of the setting */
                         $label = sprintf(__('User can %s all settings', 'age-gate'), $key);
                         break;
                     default:
+                        /* translators: Permission label. %s name of the setting */
                         $label = sprintf(__('Manage %s settings', 'age-gate'), $key);
                         break;
                 }

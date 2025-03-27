@@ -71,6 +71,7 @@ class ContentController extends AbstractController
             wp_localize_script( 'age-gate-admin-content', 'ag_content_params', [
                 'save_error' => esc_html__('Error: an error occured while saving. Please try again', 'age-gate'),
                 'load_error' => esc_html__('Error: an error occured while loading. Refreshing the page recommended', 'age-gate'),
+                'nonce' => wp_create_nonce('age_gate_store_terms'),
             ]);
         }
     }

@@ -291,10 +291,13 @@ abstract class AbstractController
 
     public static function adminHeader()
     {
-        if (($_GET['page'] ?? false) && strpos($_GET['page'], 'age-gate') !== false) {
+        global $plugin_page;
+
+        if (($plugin_page ?? false) && strpos($plugin_page, 'age-gate') !== false) {
             $view = new Engine(AGE_GATE_PATH . '/src/Resources/views/admin');
             $view->addData([
                 'tabs' => self::$tabs,
+                'page' => $plugin_page,
             ]);
             echo $view->render('partials/global/admin-toolbar');
         }

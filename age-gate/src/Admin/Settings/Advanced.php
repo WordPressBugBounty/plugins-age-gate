@@ -25,6 +25,11 @@ trait Advanced
                         ]
 
                     ],
+                    'raw_assets' => [
+                        'label' => __('Unoptimised Assets', 'age-gate'),
+                        'type' => 'checkbox',
+                        'subtext' => __('By default, age gate loads production ready assets. You can disable this if you have an alternative optimisation tool.', 'age-gate'),
+                    ],
                     'renderer' => [
                         'label' => __('Template render element', 'age-gate'),
                         'type' => 'select',
@@ -49,7 +54,7 @@ trait Advanced
                     ],
                     'use_local_storage' => [
                         'label' => __('Local storage', 'age-gate'),
-                        'sublabel' => __('BETA'),
+                        'sublabel' => __('BETA', 'age-gate'),
                         'type' => 'checkbox',
                         'default' => false,
                         'subtext' => __('Some cookie banners may disable or unset cookies, use local storage as an alternative to cookies', 'age-gate'),
@@ -109,14 +114,7 @@ trait Advanced
                         'label' => __('Trap focus', 'age-gate'),
                         'type' => 'checkbox',
                         'default' => false,
-                        'subtext' => sprintf(
-                            __('Focus trapping can help accessibility, however may conflict with other popups like cookie banners. %s', 'age-gate'),
-                            sprintf(
-                                '[%s](%s)',
-                                __('See documentation', 'age-gate'),
-                                '#'
-                            )
-                        ),
+                        'subtext' => __('Focus trapping can help accessibility, however may conflict with other popups like cookie banners.', 'age-gate'),
                     ],
                     'dev_tools' => [
                         'label' => __('Disable right click and F12', 'age-gate'),
@@ -149,7 +147,7 @@ trait Advanced
             [
                 'title' => __('Custom bots', 'age-gate'),
                 // TODO: can be a part or full user agent string
-                'subtitle' => __('You can add the user agent string of any bots that are not automatically picked up. Add 1 per line.'),
+                'subtitle' => __('You can add the user agent string of any bots that are not automatically picked up. Add 1 per line.', 'age-gate'),
                 'fields' => [
                     'user_agents' => [
                         'type' => 'textarea',

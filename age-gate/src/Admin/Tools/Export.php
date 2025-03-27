@@ -18,12 +18,14 @@ class Export
 
     public function action()
     {
-        if (!current_user_can(self::PERMISSION) || !wp_verify_nonce($_POST['ag_export'] ?? '', 'ag_export')) {
+        $postData = wp_unslash($_POST ?? []);
+
+        if (!current_user_can(self::PERMISSION) || !wp_verify_nonce($postData['ag_export'] ?? '', 'ag_export')) {
             wp_die('Disallowed action');
         }
 
-        if (empty($_POST['ag_settings'])) {
-            $this->redirect($_POST['_wp_http_referer'], 0, 'tools');
+        if (empty($postData['ag_settings'])) {
+            $this->redirect($postData['_wp_http_referer'], 0, 'tools');
 
         }
 
@@ -32,7 +34,7 @@ class Export
             'options' => [],
         ];
 
-        foreach ($_POST['ag_settings'] as $option => $value) {
+        foreach ($postData['ag_settings'] as $option => $value) {
             if ($option === 'all') {
                 continue;
             }
@@ -53,7 +55,7 @@ class Export
             }
         }
 
-        $file = 'age-gate-export-' . date('Y-m-d') . '.json';
+        $file = 'age-gate-export-' . date('Y-m-d') . '.json'; // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
 
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename={$file}");

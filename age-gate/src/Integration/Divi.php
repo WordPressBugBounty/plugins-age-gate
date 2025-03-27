@@ -16,7 +16,7 @@ class Divi extends Integration
     {
         if ($this->exists()) {
             // add_action('init', function () {
-            if (isset($_GET['et_fb']) && current_user_can('edit_posts')) {
+            if (isset($_GET['et_fb']) && current_user_can('edit_posts')) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 Settings::getInstance()->set('isBuilder', true);
             }
 

@@ -21,11 +21,11 @@
         <form method="post" action="<?php echo esc_url(admin_url('/admin-post.php')) ?>" id="ag-settings" class="ag-settings-form" data-form="<?php echo esc_attr($action) ?>">
             <input type="hidden" name="action" value="age_gate_<?php echo esc_attr($action) ?>">
             <?php wp_nonce_field('age_gate_' . $action) ?>
-            <?php echo $this->section('content'); ?>
+            <?php echo $this->section('content'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
-            <button type="submit" class="button button-primary"><?php echo __('Save settings', 'age-gate') ?></button>
+            <button type="submit" class="button button-primary"><?php echo esc_html__('Save settings', 'age-gate') ?></button>
             <?php /* <?php submit_button(__('Save settings', 'age-gate')) ?> */ ?>
         </form>
     <?php endif; ?>
-    <?php echo $this->section('after') ?>
+    <?php echo $this->section('after') // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 </div>

@@ -70,7 +70,12 @@ class Shortcode extends AbstractShortcode
                 'options' => base64_encode(json_encode(array_merge($atts, ['cookieName' => $settings->getCookieName(), 'cookieDomain' => Cookie::getDomain()]))),
             ]);
         } else {
-            $view->addData(['e' => StandardController::$errors, 'c' => self::$count]);
+            $view->addData([
+                'e' => StandardController::$errors,
+                'c' => self::$count,
+                // Nonce cannot be generated in cached sites
+                'postData' => wp_unslash($_POST ?? []), // phpcs:ignore WordPress.Security.NonceVerification.Missing
+            ]);
         }
         $markup = $view->compile('shortcode/shortcode-' . $settings->method);
 
@@ -107,7 +112,7 @@ class Shortcode extends AbstractShortcode
                             $key => [
                                 'label' => $settings->$label,
                                 'placeholder' => $settings->$placeholder,
-                                'value' => $_POST['age_gate'][$key] ?? apply_filters('age_gate/field/' . strtolower($map[$key]) . '/value', ''),
+                                'value' => sanitize_text_field(wp_unslash($_POST['age_gate'][$key] ?? apply_filters('age_gate/field/' . strtolower($map[$key]) . '/value', ''))), // phpcs:ignore WordPress.Security.NonceVerification.Missing
                                 'errors' => Validator::get_instance()->get_errors_array(),
                                 'options' => $settings->inputType === 'selects' ? $this->getOptions($key, $settings) : [],
                             ]

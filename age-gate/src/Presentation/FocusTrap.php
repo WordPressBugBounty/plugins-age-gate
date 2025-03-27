@@ -14,7 +14,8 @@ class FocusTrap
     public function assets()
     {
         $settings = Settings::getInstance();
-        wp_enqueue_script('age-gate-focus', AGE_GATE_URL . 'dist/focus.js', [], AGE_GATE_VERSION, !$settings->inHeader);
+        $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($settings->rawAssets ? '/raw' : ''));
+        wp_enqueue_script('age-gate-focus', $path . '/focus.js', [], AGE_GATE_VERSION, !$settings->inHeader);
 
         $elements = [
             '.age-gate',

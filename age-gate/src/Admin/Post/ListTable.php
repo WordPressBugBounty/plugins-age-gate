@@ -45,7 +45,7 @@ class ListTable
 
 
         if (!$disable) {
-            $columns['age_gate'] = '<span data-ag-tooltip="'.__('Age Gate').'"><i class="wp-menu-image dashicons-before dashicons-lock"></i></span> <span class="screen-reader-text">Age Gate</span>';
+            $columns['age_gate'] = '<span data-ag-tooltip="' . esc_attr__('Age Gate', 'age-gate') . '"><i class="wp-menu-image dashicons-before dashicons-lock"></i></span> <span class="screen-reader-text">Age Gate</span>';
         }
 
         return $columns;
@@ -65,9 +65,7 @@ class ListTable
         }
 
 
-        echo $this->view->addData([
-            'content' => new Content($postId),
-        ])->render('post/list-column');
+        echo $this->view->addData(['content' => new Content($postId)])->render('post/list-column'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
     /**

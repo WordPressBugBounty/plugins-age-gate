@@ -38,6 +38,12 @@ class AccessController extends AbstractController
 
     public function store()
     {
+
+        // check nonce & permission
+        if (!wp_verify_nonce(sanitize_key($_POST['_wpnonce'] ?? ''), 'age_gate_access') || !current_user_can(static::PERMISSION)) {
+            wp_die('Disallowed action');
+        }
+
         global $wp_roles;
 
         $validation = new Validator;
@@ -94,8 +100,9 @@ class AccessController extends AbstractController
 
     protected function rules() : array
     {
+
         $validation = new Validator;
-        $data = $validation->sanitize($_POST);
+        $data = $validation->sanitize($_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         return array_fill_keys(array_keys(Arr::dot($data['ag_settings'] ?? [])), 'boolean');
     }
 }

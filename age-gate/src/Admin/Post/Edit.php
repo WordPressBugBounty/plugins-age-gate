@@ -38,8 +38,10 @@ class Edit
             return;
         }
 
+        $postData = wp_unslash($_POST ?? []);
+
         // check nonce
-        if (!wp_verify_nonce($_POST['_agn'] ?? '', 'age_gate_post_edit')) {
+        if (!wp_verify_nonce($postData['_agn'] ?? '', 'age_gate_post_edit')) {
             return;
         }
 
@@ -47,12 +49,12 @@ class Edit
 
         // mutli ages?
         if ($this->settings->multiAge && current_user_can(Constants::SET_CUSTOM_AGE)) {
-            $language = $content->getLanguage() ?: sanitize_text_field($_POST['post_lang_choice'] ?? $_POST['icl_post_language'] ?? '');
+            $language = $content->getLanguage() ?: sanitize_text_field($postData['post_lang_choice'] ?? $postData['icl_post_language'] ?? '');
 
             $default = $this->settings->{$language}['defaultAge'] ?? $this->settings->defaultAge;
 
-            if ($_POST['ag_settings']['age'] ?? false) {
-                $age = (int) $_POST['ag_settings']['age'];
+            if ($postData['ag_settings']['age'] ?? false) {
+                $age = (int) $postData['ag_settings']['age'];
 
                 if ($age === (int) $default) {
                     // remove the meta as we don't need it
@@ -68,7 +70,7 @@ class Edit
 
         // bypass ?
         if ($this->settings->type === 'all' && current_user_can(Constants::SET_CONTENT)) {
-            if ($_POST['ag_settings']['bypass'] ?? false) {
+            if ($postData['ag_settings']['bypass'] ?? false) {
                 // add new meta key
                 update_post_meta($postId, Constants::META_BYPASS, 1);
             } else {
@@ -79,7 +81,7 @@ class Edit
 
         // restrict
         if ($this->settings->type === 'selected' && current_user_can(Constants::SET_CONTENT)) {
-            if ($_POST['ag_settings']['restrict'] ?? false) {
+            if ($postData['ag_settings']['restrict'] ?? false) {
                 // add new meta key
                 update_post_meta($postId, Constants::META_RESTRICT, 1);
             } else {
@@ -123,12 +125,14 @@ class Edit
     {
         global $post;
 
-        echo $this->view->addData([
+        $data = [
             'content' => new Content($post->ID),
             'settings' => Settings::getInstance(),
             'setRestriction' => current_user_can(Constants::SET_CONTENT),
             'setAge' => current_user_can(Constants::SET_CUSTOM_AGE),
             'contentOption' => $this->settings->type === 'selected' ? Constants::META_RESTRICT : Constants::META_BYPASS,
-        ])->render('post/meta-box');
+        ];
+
+        echo $this->view->addData($data)->render('post/meta-box'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 }

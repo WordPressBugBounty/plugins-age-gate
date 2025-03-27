@@ -29,7 +29,7 @@ trait Restriction
                         'type' => 'select',
                         'options' => [
                             'all' => __('All content', 'age-gate'),
-                            'selected' => __('Selected content'),
+                            'selected' => __('Selected content', 'age-gate'),
                         ],
                         'arrtibutes' => [],
                         'label' => __('Restrict', 'age-gate'),
@@ -99,7 +99,7 @@ trait Restriction
                         'default' => false,
                         'label' => __('Stepped Inputs', 'age-gate'),
                         'subtext' => __('Not available on all devices', 'age-gate'),
-                        'sublabel' => __('BETA'),
+                        'sublabel' => __('BETA', 'age-gate'),
                         'docs' => [
                             'link' => 'https://agegate.io/docs/v3/cms-settings/restrictions/stepped-inputs-beta',
                             'label' => __('Documentation', 'age-gate'),

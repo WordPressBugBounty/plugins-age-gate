@@ -52,7 +52,7 @@ class ViewController
                             $key => [
                                 'label' => $settings->$label,
                                 'placeholder' => $settings->$placeholder,
-                                'value' => ((int) ($_POST['age_gate'][$key] ?? 0)) ?: apply_filters('age_gate/field/' . strtolower($map[$key]) . '/value', ''),
+                                'value' => ((int) (wp_unslash($_POST['age_gate'][$key] ?? 0))) ?: apply_filters('age_gate/field/' . strtolower($map[$key]) . '/value', ''), // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
                                 'errors' => Validator::get_instance()->get_errors_array(),
                                 'options' => $settings->inputType === 'selects' ? $this->getOptions($key, $settings) : [],
                             ]

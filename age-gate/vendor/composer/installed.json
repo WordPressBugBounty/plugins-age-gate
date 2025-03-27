@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:philsbury/age-gate-common.git",
-                "reference": "2cd357396b017d4c4ce94073d3e07216872f51b2"
+                "reference": "1b30a509065b3ba67cad9ff30dd83471723c7966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/philsbury/age-gate-common/zipball/2cd357396b017d4c4ce94073d3e07216872f51b2",
-                "reference": "2cd357396b017d4c4ce94073d3e07216872f51b2",
+                "url": "https://api.github.com/repos/philsbury/age-gate-common/zipball/1b30a509065b3ba67cad9ff30dd83471723c7966",
+                "reference": "1b30a509065b3ba67cad9ff30dd83471723c7966",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
             "require-dev": {
                 "symfony/var-dumper": "^5.4"
             },
-            "time": "2025-03-18T21:05:58+00:00",
+            "time": "2025-03-26T08:37:52+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

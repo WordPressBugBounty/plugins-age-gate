@@ -27,7 +27,8 @@ class RestrictionController extends AbstractController
     public function register(): void
     {
         add_action('admin_print_footer_scripts', function () {
-            if (isset($_REQUEST['page']) && strpos($_REQUEST['page'], 'age-gate') !== false) {
+            global $plugin_page;
+            if ($plugin_page && strpos($plugin_page, 'age-gate') !== false) {
                 if (! class_exists('_WP_Editors') && (! defined('DOING_AJAX') or ! DOING_AJAX)) {
                     require_once ABSPATH.WPINC.'/class-wp-editor.php';
                     wp_print_styles('editor-buttons');

@@ -14,6 +14,7 @@ class Interaction
     public function assets()
     {
         $settings = Settings::getInstance();
-        wp_enqueue_script('age-gate-interaction', AGE_GATE_URL . 'dist/interaction.js', [], AGE_GATE_VERSION, !$settings->inHeader);
+        $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($settings->rawAssets ? '/raw' : ''));
+        wp_enqueue_script('age-gate-interaction', $path . '/interaction.js', [], AGE_GATE_VERSION, !$settings->inHeader);
     }
 }

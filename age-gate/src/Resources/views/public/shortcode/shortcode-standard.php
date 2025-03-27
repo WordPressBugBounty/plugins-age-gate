@@ -1,8 +1,8 @@
-<div <?php echo $this->attr('age-gate-shortcode'); ?><?php echo ($settings->poster ? ' style="background-image: url(' . esc_url($settings->poster) . ');"' : '') ?>>
-    <form method="post" <?php echo $this->attr('age-gate-form'); ?>>
-        <div <?php echo $this->attr('age-gate-shortcode-inner'); ?>>
+<div <?php echo $this->attr('age-gate-shortcode'); ?><?php echo ($settings->poster ? ' style="background-image: url(' . esc_url($settings->poster) . ');"' : '') ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+    <form method="post" <?php echo $this->attr('age-gate-form'); ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+        <div <?php echo $this->attr('age-gate-shortcode-inner'); ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             <?php if ($settings->inputType !== 'buttons') : ?>
-                <<?php echo esc_attr($settings->challengeElement ?: 'p') ?> <?php echo $this->attr('age-gate-challenge') ?>>
+                <<?php echo esc_attr($settings->challengeElement ?: 'p') ?> <?php echo $this->attr('age-gate-challenge') ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <?php echo esc_html(sprintf($this->stringTemplate($settings->labelButtons, ['age' => $content->getAge($settings->anonymous)]), $content->getAge($settings->anonymous))) ?>
                 </<?php echo esc_attr($settings->challengeElement ?: 'p') ?>>
             <?php endif ?>
@@ -15,12 +15,12 @@
                 }
             ?>
             <?php if ($settings->method === 'js') : ?>
-                <div <?php echo $this->attr('age-gate-errors') ?>></div>
+                <div <?php echo $this->attr('age-gate-errors') ?>></div><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             <?php endif; ?>
 
-            <?php if ($settings->method !== 'js' && $e && $c == ($_POST['ag_sc'] ?? false)) : ?>
-                <div <?php echo $this->attr('age-gate-errors') ?>>
-                    <p <?php echo $this->attr('age-gate-error') ?>><?php echo $this->mdLine(end($e)) ?></p>
+            <?php if ($settings->method !== 'js' && $e && $c == ($postData['ag_sc'] ?? false)) : ?><?php // phpcs:ignore WordPress.Security.NonceVerification.Missing ?>
+                <div <?php echo $this->attr('age-gate-errors') ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <p <?php echo $this->attr('age-gate-error') ?>><?php echo $this->mdLine(end($e)) ?></p><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
                 </div>
             <?php endif; ?>

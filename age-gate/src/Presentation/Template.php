@@ -121,7 +121,7 @@ class Template
     {
         $type = wp_check_filetype($file);
         if (strpos(($type['type'] ?? ''), 'video') !== false) {
-            echo sprintf('<video src="%s" loop muted playsinline autoplay></video>', $file);
+            echo sprintf('<video src="%s" loop muted playsinline autoplay></video>', esc_attr($file));
         }
     }
 }

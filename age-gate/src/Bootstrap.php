@@ -31,8 +31,7 @@ new Template;
 
 new Check;
 new LegacyCheck;
-// new Routes\Rest\Media();
-new Developer;
+
 new Term;
 
 new Shortcode;

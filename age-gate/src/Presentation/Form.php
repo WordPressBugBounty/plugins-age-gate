@@ -19,8 +19,8 @@ class Form
 
     public function optionStyle()
     {
-        wp_register_style($this->custom, false);
-        wp_add_inline_style($this->custom, strip_tags(stripslashes(html_entity_decode($this->getStyleOptions(), ENT_QUOTES))));
+        wp_register_style($this->custom, false); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+        wp_add_inline_style($this->custom, wp_strip_all_tags(stripslashes(html_entity_decode($this->getStyleOptions(), ENT_QUOTES))));
 
         return $this;
     }
@@ -40,9 +40,9 @@ class Form
 
             wp_register_style($this->custom, Storage::storageUrl('css', 'age-gate') . '/custom.css', $deps, AGE_GATE_VERSION);
         } else {
-            wp_register_style($this->custom, false);
+            wp_register_style($this->custom, false); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
-            wp_add_inline_style($this->custom, strip_tags(stripslashes(html_entity_decode($this->settings->css, ENT_QUOTES))));
+            wp_add_inline_style($this->custom, wp_strip_all_tags(stripslashes(html_entity_decode($this->settings->css, ENT_QUOTES))));
         }
 
         return $this;
@@ -101,12 +101,12 @@ class Form
         }
 
         $styles = trim($styles);
-        wp_register_style($this->options, false, ['age-gate']);
+        wp_register_style($this->options, false, ['age-gate']); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
         if ($styles) {
             $styles = sprintf(':root{%s}', $styles);
 
-            wp_add_inline_style($this->options, strip_tags(stripslashes(html_entity_decode($styles, ENT_QUOTES))));
+            wp_add_inline_style($this->options, wp_strip_all_tags(stripslashes(html_entity_decode($styles, ENT_QUOTES))));
         }
 
         return $styles;

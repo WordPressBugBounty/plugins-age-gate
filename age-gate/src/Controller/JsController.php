@@ -19,7 +19,9 @@ class JsController extends AbstractController implements ControllerInterface
 
         add_action('wp_enqueue_scripts', function(){
             if ($this->settings->jsHooks) {
-                wp_enqueue_script('age-gate-hooks', AGE_GATE_URL . 'dist/hooks.js', [], AGE_GATE_VERSION, !$this->settings->inHeader);
+                $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($this->settings->rawAssets ? '/raw' : ''));
+
+                wp_enqueue_script('age-gate-hooks', $path . '/hooks.js', [], AGE_GATE_VERSION, !$this->settings->inHeader);
             }
 
         }, 1);
@@ -28,10 +30,12 @@ class JsController extends AbstractController implements ControllerInterface
     public function assets(): void
     {
         if ($this->content->getRestricted()) {
-            wp_register_script('age-gate-stepped', AGE_GATE_URL . 'dist/stepped.js', [], AGE_GATE_VERSION, !$this->settings->inHeader);
+            $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($this->settings->rawAssets ? '/raw' : ''));
+
+            wp_register_script('age-gate-stepped', $path . '/stepped.js', [], AGE_GATE_VERSION, !$this->settings->inHeader);
 
             wp_enqueue_style('age-gate');
-            wp_enqueue_script('age-gate', AGE_GATE_URL . 'dist/age-gate.js', $this->getScriptDependencies(), AGE_GATE_VERSION, !$this->settings->inHeader);
+            wp_enqueue_script('age-gate', $path . '/age-gate.js', $this->getScriptDependencies(), AGE_GATE_VERSION, !$this->settings->inHeader);
 
             $data = [
                 'cookieDomain' => Cookie::getDomain(),
@@ -68,7 +72,7 @@ class JsController extends AbstractController implements ControllerInterface
                     if ($data['customTitle'] ?? false) {
                         age_gate_add_attribute('age-gate', 'data-title', $data['customTitle']);
                     }
-                    echo '<meta name="age-gate" content="" data-ag-munge="' . base64_encode(json_encode($data)) . '" />';
+                    echo '<meta name="age-gate" content="" data-ag-munge="' . base64_encode(json_encode($data)) . '" />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 // }, 1);
             }
         }

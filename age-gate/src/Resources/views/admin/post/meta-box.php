@@ -14,6 +14,7 @@
     <h4 class="ag-post-metabox__title" data-age="<?php echo esc_attr($content->getAge()) ?>" data-text-restrict="<?php echo esc_attr($settings->anonymous ? __('Restricted', 'age-gate') : __('Restricted to {0}', 'age-gate')) ?>" data-text-unrestrict="<?php echo esc_attr(__('Unrestricted', 'age-gate')) ?>">
         <i class="dashicons <?php echo esc_attr($restricted ? 'dashicons-lock' : 'dashicons-unlock') ?>"></i>
         <span class="ag-post-metabox__text">
+            <?php /* translators: 1: Current content age restriction */ ?>
             <?php echo ($restricted ? esc_html($settings->anonymous ? __('Restricted', 'age-gate') : sprintf(__('Restricted to %s', 'age-gate'), $content->getAge())) : esc_html(__('Unrestricted', 'age-gate'))) ?>
         </span>
         <?php if ($settings->multiAge && $setAge && !$settings->anonymous) : ?>
@@ -34,7 +35,8 @@
         <?php
             $inherited = collect($content->getTerms())->where( 'age', $content->getAge())->first();
             if ($inherited) : ?>
-                <p><?php echo esc_html(sprintf(__('This content is unrestricted, but is inheriting an %s restriction from term %s'), $content->getAge(), $inherited->name)) ?></p>
+                <?php /* translators: 1: Current content age restriction. 2: Term name  */ ?>
+                <p><?php echo esc_html(sprintf(__('This content is unrestricted, but is inheriting an %1$s restriction from term %1$s', 'age-gate'), $content->getAge(), $inherited->name)) ?></p>
             <?php endif; ?>
     <?php endif; ?>
     <?php wp_nonce_field( 'age_gate_post_edit', '_agn') ?>

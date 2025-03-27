@@ -186,6 +186,9 @@ trait ClassNames
         'age-gate-extra' => [
             'class' => 'age-gate{element}extra'
         ],
+        'age-gate-template' => [
+            'class' => '',
+        ]
     ];
 
     public static $disallowedAttributes = [
@@ -203,6 +206,203 @@ trait ClassNames
         'data-error-field',
         'method',
         'action',
+        'onclick',
+        'onload',
+        'onerror',
+        'disabled',
+        'accept',
+        'accept-charset',
+        'action',
+        'align',
+        'allow',
+        'as',
+        'async',
+        'autocapitalize',
+        'autocomplete',
+        'autoplay',
+        'bgcolor',
+        'border',
+        'capture',
+        'charset',
+        'checked',
+        'cite',
+        'color',
+        'cols',
+        'colspan',
+        'content',
+        'contenteditable',
+        'controls',
+        'coords',
+        'crossorigin',
+        'csp',
+        'datetime',
+        'decoding',
+        'default',
+        'defer',
+        'dir',
+        'dirname',
+        'disabled',
+        'download',
+        'draggable',
+        'enctype',
+        'enterkeyhint',
+        'for',
+        'form',
+        'formaction',
+        'headers',
+        'height',
+        'hidden',
+        'high',
+        'href',
+        'hreflang',
+        'http-equiv',
+        'id',
+        'integrity',
+        'intrinsicsize',
+        'inputmode',
+        'ismap',
+        'itemprop',
+        'kind',
+        'label',
+        'lang',
+        'language',
+        'loading',
+        'list',
+        'loop',
+        'low',
+        'media',
+        'method',
+        'multiple',
+        'muted',
+        'name',
+        'novalidate',
+        'open',
+        'optimum',
+        'pattern',
+        'ping',
+        'playsinline',
+        'poster',
+        'preload',
+        'readonly',
+        'referrerpolicy',
+        'required',
+        'reversed',
+        'rows',
+        'rowspan',
+        'sandbox',
+        'scope',
+        'scoped',
+        'selected',
+        'shape',
+        'size',
+        'sizes',
+        'slot',
+        'span',
+        'spellcheck',
+        'src',
+        'srcdoc',
+        'srclang',
+        'srcset',
+        'start',
+        'step',
+        'style',
+        'summary',
+        'target',
+        'translate',
+        'type',
+        'usemap',
+        'value',
+        'width',
+        'wrap',
+        'formenctype',
+        'formmethod',
+        'formnovalidate',
+        'formtarget',
+    ];
+
+    protected static $validAttributes = [
+        'accesskey',
+        'alt',
+        'background',
+        'class',
+        'data',
+        'data-*',
+        'max',
+        'maxlength',
+        'minlength',
+        'min',
+        'placeholder',
+        'rel',
+        'role',
+        'tabindex',
+        'title',
+        'aria-autocomplete',
+        'aria-checked',
+        'aria-disabled',
+        'aria-errormessage',
+        'aria-expanded',
+        'aria-haspopup',
+        'aria-hidden',
+        'aria-invalid',
+        'aria-label',
+        'aria-level',
+        'aria-modal',
+        'aria-multiline',
+        'aria-multiselectable',
+        'aria-orientation',
+        'aria-placeholder',
+        'aria-pressed',
+        'aria-readonly',
+        'aria-required',
+        'aria-selected',
+        'aria-sort',
+        'aria-valuemax',
+        'aria-valuemin',
+        'aria-valuenow',
+        'aria-valuetext',
+        'aria-busy',
+        'aria-live',
+        'aria-relevant',
+        'aria-atomic',
+        'aria-activedescendant',
+        'aria-colcount',
+        'aria-colindex',
+        'aria-colspan',
+        'aria-controls',
+        'aria-describedby',
+        'aria-description',
+        'aria-details',
+        'aria-errormessage',
+        'aria-flowto',
+        'aria-labelledby',
+        'aria-owns',
+        'aria-posinset',
+        'aria-rowcount',
+        'aria-rowindex',
+        'aria-rowspan',
+        'aria-setsize',
+        'aria-atomic',
+        'aria-busy',
+        'aria-controls',
+        'aria-current',
+        'aria-describedby',
+        'aria-description',
+        'aria-details',
+        'aria-disabled',
+        'aria-dropeffect',
+        'aria-errormessage',
+        'aria-flowto',
+        'aria-grabbed',
+        'aria-haspopup',
+        'aria-hidden',
+        'aria-invalid',
+        'aria-keyshortcuts',
+        'aria-label',
+        'aria-labelledby',
+        'aria-live',
+        'aria-owns',
+        'aria-relevant',
+        'aria-roledescription',
     ];
 
     public static $months = [
@@ -223,9 +423,14 @@ trait ClassNames
     public static function addAttribute(string $element, $attribute, string $value): void
     {
         if (in_array($attribute, self::$disallowedAttributes)) {
-            _doing_it_wrong('age_gate_add_attribute', wp_sprintf('`%s` may not be assigned', $attribute), AGE_GATE_VERSION);
+            _doing_it_wrong('age_gate_add_attribute', esc_html(wp_sprintf('`%s` may not be assigned', $attribute)), esc_html(AGE_GATE_VERSION));
             return;
             // wp_die('Disallowed attribute: <b>"' . $attribute . '"</b> on <b>"' . $element . '"</b>');
+        }
+
+        if (!in_array($attribute, self::$validAttributes) && strpos($attribute, 'data-') !== 0) {
+            _doing_it_wrong('age_gate_add_attribute', esc_html(wp_sprintf('Invalid attribute', $attribute)), esc_html(AGE_GATE_VERSION));
+            return;
         }
 
         if (is_array($attribute)) {
@@ -237,6 +442,8 @@ trait ClassNames
             if (!isset(self::$attributes[$element])) {
                 return;
             }
+
+            $attribute = sanitize_text_field( $attribute);
 
             if (isset(self::$attributes[$element][$attribute])) {
                 if (strpos(self::$attributes[$element][$attribute], $value) === false) {
@@ -266,7 +473,7 @@ trait ClassNames
         }
 
         if ($echo) {
-            echo self::getAttribute($element);
+            echo self::getAttribute($element); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return;
         }
 

@@ -24,7 +24,8 @@ class Check
 
     public function check()
     {
-        wp_send_json((new Submit($_POST, $this->settings))->validate());
+        // Nonce verification is not viable with caching plugins
+        wp_send_json((new Submit($_POST, $this->settings))->validate()); // phpcs:ignore WordPress.Security.NonceVerification.Missing
         wp_die();
     }
 }

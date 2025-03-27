@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php echo get_language_attributes() ?> <?php echo $this->attr('age-gate-html') ?>>
+<html <?php echo get_language_attributes() ?> <?php echo $this->attr('age-gate-html') ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +11,8 @@
     <?php endif; ?>
     <?php wp_head() ?>
 </head>
-    <body <?php echo $this->attr('age-gate-body') ?>>
-        <?php echo $this->section('content') ?>
+    <body <?php echo $this->attr('age-gate-body') ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+        <?php echo $this->section('content') ?><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
         <?php wp_footer() ?>
     </body>
 </html>

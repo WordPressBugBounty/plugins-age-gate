@@ -1,9 +1,9 @@
 <div class="wrap">
     <h2><?php echo esc_html(get_admin_page_title()) ?></h2>
 
-    <p><?php echo esc_html__('Below are some common issues and steps to take to solve them.') ?></p>
+    <p><?php echo esc_html__('Below are some common issues and steps to take to solve them.', 'age-gate') ?></p>
 
-    <p><?php echo esc_html__('Age Gate 3.x has many changes under the surface and while our testing has been pretty rigourous, every setup is different and thing may have slipped trhough the cracks.') ?></p>
+    <p><?php echo esc_html__('Age Gate 3.x has many changes under the surface and while our testing has been pretty rigourous, every setup is different and thing may have slipped trhough the cracks.', 'age-gate') ?></p>
 
     <div class="ag-accordion">
         <h3 class="ag-accordion__trigger ag-accordion__trigger--single"><?php echo esc_html__('I can\'t get past the Age Gate / The Age Gate only worked once', 'age-gate') ?></h3>
@@ -63,7 +63,7 @@
             <p><?php echo esc_html__('Reinstall the plugin code.', 'age-gate') ?> <?php echo esc_html__('You can download the plugin and reupload to you site via either the Wordpress admin or SFTP.', 'age-gate') ?></p>
             <p><?php echo esc_html__('Reset the plugin.', 'age-gate') ?> <?php echo esc_html__('This will remove any settings and restore the default ones so use with caution.', 'age-gate') ?></p>
 
-            <h4><?php echo esc_html__('Rollback the plugin') ?></h4>
+            <h4><?php echo esc_html__('Rollback the plugin', 'age-gate') ?></h4>
 
             <p><?php echo sprintf(esc_html__('If all else fails, you can always roll back to a previous version of the plugin.', 'age-gate' )); ?>
             <p><a href="https://wordpress.org/plugins/age-gate/advanced/#download-previous-link" target="_blank" rel="noopener noreferrer"><?php echo esc_html__('See previous versions', 'age-gate') ?></a></p>

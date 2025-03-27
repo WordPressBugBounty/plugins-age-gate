@@ -4,13 +4,15 @@
  * Plugin Name:       	 Age Gate
  * Plugin URI:           https://agegate.io/
  * Description:       	 A customisable age gate to block content from younger people
- * Version:           	 3.5.4
+ * Version:           	 3.6.0
  * Requires at least:    6.0.0
  * Requires PHP:         7.4
  * Author:            	 Phil Baker
  * Author URI:        	 https://agegate.io/
  * Text Domain:       	 age-gate
  * Domain Path:          /language
+ * License:              GPL v2 or later
+ * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if (!defined('WPINC')) {
@@ -19,7 +21,7 @@ if (!defined('WPINC')) {
 
 define('AGE_GATE_PATH', plugin_dir_path(__FILE__));
 define('AGE_GATE_URL', plugin_dir_url(__FILE__));
-define('AGE_GATE_VERSION', '3.5.4');
+define('AGE_GATE_VERSION', '3.6.0');
 define('AGE_GATE_SLUG', 'age-gate');
 
 $autoload = AGE_GATE_PATH . 'vendor/autoload.php';

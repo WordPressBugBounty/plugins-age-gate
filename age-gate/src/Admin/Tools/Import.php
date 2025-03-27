@@ -19,7 +19,7 @@ class Import
 
     public function action()
     {
-        if (!current_user_can(self::PERMISSION) || !wp_verify_nonce($_POST['ag_import'] ?? '', 'ag_import')) {
+        if (!current_user_can(self::PERMISSION) || !wp_verify_nonce(sanitize_key($_POST['ag_import'] ?? ''), 'ag_import')) {
             wp_die('Disallowed action');
         }
 
@@ -36,11 +36,20 @@ class Import
 
         ]);
 
-        $valid_data = $validator->run(array_merge($_POST, $_FILES, ['data' => $_FILES['ag_settings_import']['tmp_name'] ? file_get_contents($_FILES['ag_settings_import']['tmp_name']) : 's']));
+
+        $valid_data = $validator->run(
+            array_merge(
+                $_POST,
+                $_FILES ?? [],
+                [
+                    'data' => ($_FILES['ag_settings_import']['tmp_name'] ?? false) ? file_get_contents($_FILES['ag_settings_import']['tmp_name']) : 's', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                ]
+            )
+        );
 
         if ($validator->errors()) {
-
-            $this->redirect($_POST['_wp_http_referer'], 0, 'tools');
+            // url is escaped in the rediected method
+            $this->redirect(sanitize_text_field(wp_unslash($_POST['_wp_http_referer'] ?? admin_url('admin.php')), 0, 'tools'));
         }
 
         $data = $validator->sanitize(json_decode($valid_data['data'], true));
@@ -85,7 +94,7 @@ class Import
         }
 
 
-        $this->redirect($_POST['_wp_http_referer'], 1, 'tools');
+        $this->redirect(sanitize_text_field(wp_unslash($_POST['_wp_http_referer'] ?? admin_url( '/admin.php'))), 1, 'tools');
 
     }
 }

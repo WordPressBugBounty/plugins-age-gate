@@ -32,7 +32,7 @@ trait Appearance
                     'heading' => [
                         'type' => 'text',
                         'label' => __('Title', 'age-gate'),
-                        'subtext' => __('Defaults to the site title'),
+                        'subtext' => __('Defaults to the site title', 'age-gate'),
                         'condition' => [
                             'x-show' => 'logo == \'\' && disable_title == \'\'',
                         ],
@@ -133,7 +133,7 @@ trait Appearance
                         'subtext' => __('Use plugin style on the front end', 'age-gate')
                     ],
                     'heading_element' => [
-                        'label' => __('Heading element'),
+                        'label' => __('Heading element', 'age-gate'),
                         'type' => 'select',
                         'options' => [
                             'h1' => 'H1',
@@ -146,7 +146,7 @@ trait Appearance
                         'default' => 'h1',
                     ],
                     'headline_element' => [
-                        'label' => __('Headline element'),
+                        'label' => __('Headline element', 'age-gate'),
                         'type' => 'select',
                         'options' => [
                             'h1' => 'H1',
@@ -159,7 +159,7 @@ trait Appearance
                         'default' => 'h2',
                     ],
                     'sub_headline_element' => [
-                        'label' => __('Sub Headline element'),
+                        'label' => __('Sub Headline element', 'age-gate'),
                         'type' => 'select',
                         'options' => [
                             'h1' => 'H1',

@@ -7,9 +7,9 @@
     <?php if ($section['subtitle'] ?? false) : ?>
         <p><?php echo esc_html($section['subtitle']) ?></p>
     <?php endif; ?>
-    <table class="form-table" <?php echo html_build_attributes($section['condition'] ?? []) ?>>
+    <table class="form-table" <?php echo html_build_attributes($section['condition'] ?? []) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
         <?php foreach ($section['fields'] ?? [] as $name => $field) : ?>
-            <tr <?php echo html_build_attributes($field['condition'] ?? []) ?>>
+            <tr <?php echo html_build_attributes($field['condition'] ?? []) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                 <th>
                     <?php echo esc_html($field['label']) ?>
                     <?php if ($field['sublabel'] ?? false) : ?>
@@ -57,5 +57,5 @@
 
 
 <?php $this->start('after') ?>
-    <?php echo $this->section('additional') ?>
+    <?php echo $this->section('additional') // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 <?php $this->stop() ?>

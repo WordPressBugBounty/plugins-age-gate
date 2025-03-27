@@ -6,7 +6,7 @@
         ]) ?>
     <?php endif; ?>
 
-    <?php echo $this->section('input') ?>
+    <?php echo $this->section('input') // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
     <?php if ($field['tooltip'] ?? false) : ?>
         <span data-ag-tooltip="<?php echo esc_html($field['tooltip']) ?>">
@@ -15,6 +15,6 @@
     <?php endif; ?>
 
     <?php if ($field['subtext'] ?? false) : ?>
-        <p class="ag-small"><?php echo $this->md(esc_html($field['subtext'])) ?></p>
+        <p class="ag-small"><?php echo $this->md(esc_html($field['subtext'])) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
     <?php endif; ?>
 </div>

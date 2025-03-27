@@ -61,12 +61,12 @@ class Deprecated
 
     public function addLegacyBefore()
     {
-        echo apply_filters('pre_age_gate_custom_fields', '');
+        echo wp_kses_post(apply_filters('pre_age_gate_custom_fields', ''));
     }
 
     public function addLegacyAfter()
     {
-        echo apply_filters('post_age_gate_custom_fields', '');
+        echo wp_kses_post(apply_filters('post_age_gate_custom_fields', ''));
     }
 
     public function addLegacyMessages($messages)

@@ -17,7 +17,7 @@ class Preload
     public function assets()
     {
         if ($this->settings->logo) {
-            echo sprintf('<link rel="preload" href="%s" as="image" />', $this->settings->logo);
+            echo sprintf('<link rel="preload" href="%s" as="image" />', esc_attr($this->settings->logo));
             echo "\r\n";
         }
 
@@ -26,7 +26,7 @@ class Preload
             $type = wp_check_filetype($file);
 
             if (strpos($type['type'], 'image') !== false && $this->settings->logo !== $this->settings->backgroundImage) {
-                echo sprintf('<link rel="preload" href="%s" as="image" />', $file);
+                echo sprintf('<link rel="preload" href="%s" as="image" />', esc_attr($file));
                 echo "\r\n";
             }
         }
