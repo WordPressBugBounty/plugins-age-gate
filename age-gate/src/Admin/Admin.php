@@ -23,7 +23,7 @@ class Admin
     public function __construct()
     {
         // add_action('init', fn() => dd(Language::getInstance()->getLanguages()));
-        add_action('plugins_loaded', function () {
+        add_action('init', function () {
             new RestrictionController();
             new MessageController();
             new AppearanceController();
