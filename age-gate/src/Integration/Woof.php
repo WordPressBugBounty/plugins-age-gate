@@ -16,12 +16,16 @@ class Woof extends Integration
         if ($this->exists()) {
 
             add_filter('age_gate/init/content', function($content) {
-                $woof = new \WOOF;
+                global $WOOF;
 
-                if (method_exists($woof, 'get_really_current_term') && $term = $woof->get_really_current_term()) {
+                if (!$WOOF instanceof \WOOF) {
+                    return $content;
+                }
+
+                if (method_exists($WOOF, 'get_really_current_term') && $term = $WOOF->get_really_current_term()) {
                     // dd($term);
                     $content = new \AgeGate\Common\Content($term, 'term');
-                } elseif ($woof->is_isset_in_request_data($woof->get_swoof_search_slug())) {
+                } elseif ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())) {
                     global $wp_query;
 
                     if (($wp_query->query_vars['taxonomy'] ?? false) && ($wp_query->query_vars['term'] ?? false)) {
