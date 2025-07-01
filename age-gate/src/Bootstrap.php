@@ -11,7 +11,6 @@ use AgeGate\Legacy\Check as LegacyCheck;
 use AgeGate\Routes\Rest\Check;
 use AgeGate\Shortcode\Shortcode;
 use AgeGate\Presentation\Template;
-use AgeGate\Routes\Rest\Developer;
 use AgeGate\Routes\Rest\Admin\Term;
 
 add_action('wp', function() {

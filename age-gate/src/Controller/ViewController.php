@@ -9,8 +9,11 @@ use AgeGate\Utility\Encrypt;
 use Asylum\Validation\Validator;
 use AgeGate\Presentation\Attribute;
 use AgeGate\Presentation\ClassNames;
-use Asylum\Utility\Facades\Parsedown;
+use League\CommonMark\MarkdownConverter;
 use Asylum\Utility\Facades\StringTemplate;
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
 
 class ViewController
 {
@@ -62,14 +65,39 @@ class ViewController
             )
             ->addFunction('attr', [Attribute::class, 'attr'])
             ->addFunction('stringTemplate', [StringTemplate::class, 'render'])
-            ->addFunction('mdLine', [Parsedown::class, 'line'])
-            ->addFunction('mdText', [Parsedown::class, 'text']);
+            ->addFunction('mdLine', [$this, 'line'])
+            ->addFunction('mdText', [$this, 'text']);
 
         if (is_dir($theme)) {
             $this->view->addFolder('theme', $theme);
         }
     }
 
+    public function line($string)
+    {
+        // Define your configuration, if needed
+        $config = [];
+
+        // Create a new, empty environment
+        $environment = new Environment($config);
+
+        // Add this extension
+        $environment->addExtension(new InlinesOnlyExtension());
+
+        // Instantiate the converter engine and start converting some Markdown!
+        $converter = new MarkdownConverter($environment);
+        return $converter->convert($string);
+        return (new CommonMarkConverter)
+            ->convert($string);
+
+    }
+
+    public function text($string)
+    {
+        return (new CommonMarkConverter)
+            ->convert($string);
+
+    }
 
     public function getView()
     {

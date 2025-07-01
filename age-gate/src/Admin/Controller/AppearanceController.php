@@ -34,6 +34,27 @@ class AppearanceController extends AbstractController
         return $this->getAppearanceFields();
     }
 
+    public function store()
+    {
+        $fields = $this->getAppearanceFields();
+
+        $f = [
+            'heading_element',
+            'headline_element',
+            'sub_headline_element',
+            'exit_transition',
+        ];
+
+        foreach ($f as $field) {
+            if (!array_key_exists($_POST['ag_settings'][$field], $fields[0]['fields'][$field]['options'])) {
+                $_POST['ag_settings'][$field] = $fields[0]['fields'][$field]['default'];
+            }
+        }
+
+
+        parent::store();
+    }
+
     protected function rules() : array
     {
         return [

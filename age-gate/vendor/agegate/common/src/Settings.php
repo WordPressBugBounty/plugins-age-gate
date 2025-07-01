@@ -2,28 +2,21 @@
 
 namespace AgeGate\Common;
 
-use Parsedown;
-use Asylum\Utility\Arr;
+use Illuminate\Support\Arr;
 use Asylum\Utility\Language;
-use AgeGate\Common\Immutable\Constants;
 use Jawira\CaseConverter\Convert;
+use AgeGate\Common\Immutable\Constants;
 
 class Settings
 {
     private $data = [];
-    private $parsedown;
     public $currentLanguage;
 
     private static $instance = null;
 
-    private $parseFields = [
-        'content',
-        'errorInvalid'
-    ];
-
     private function __construct()
     {
-        $this->parsedown = new Parsedown();
+
         $this->currentLanguage = !empty($_REQUEST['age_gate']['lang']) ? sanitize_file_name($_REQUEST['age_gate']['lang']) : Language::getInstance()->getLanguage();
         // $this->data['language'] = $this->currentLanguage;
 
@@ -114,10 +107,6 @@ class Settings
         // _doing_it_wrong( $prop, 'Do not call properties directly', '3.0.0' );
         $c = $this->data[(new Convert($this->currentLanguage))->toCamel()][$prop] ?? $this->data[$this->currentLanguage][$prop] ?? $this->data[$prop] ?? false;
 
-        // if ($c && in_array($prop, $this->parseFields)) {
-        //     $method = (preg_match('/\R/', $c)) ? 'text' : 'line';
-        //     $c = $this->parsedown->$method($c);
-        // }
 
         return $c;
     }
@@ -125,10 +114,6 @@ class Settings
     public function set($prop, $value)
     {
         $this->data[$prop] = $value;
-    }
-
-    private function parse($content)
-    {
     }
 
     public static function getInstance()

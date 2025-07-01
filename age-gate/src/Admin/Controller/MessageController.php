@@ -4,6 +4,7 @@ namespace AgeGate\Admin\Controller;
 
 use Asylum\Utility\Arr;
 use AgeGate\Admin\Settings\Message;
+use League\HTMLToMarkdown\HtmlConverter;
 use AgeGate\Common\Admin\AbstractController;
 use AgeGate\Common\Immutable\Constants as Immutable;
 
@@ -36,6 +37,17 @@ class MessageController extends AbstractController
 
     public function enqueue(): void
     {
+    }
+
+    protected function store()
+    {
+        $converter = new HtmlConverter();
+        foreach ($_POST['ag_settings'] ?? [] as $key => $setting) {
+            $_POST['ag_settings'][$key] = $converter->convert(html_entity_decode($setting));
+
+        }
+
+        parent::store();
     }
 
     protected function rules() : array

@@ -38,11 +38,13 @@ class Shortcode extends AbstractShortcode
             'age-gate'
         );
 
+
         if ($this->status($settings, $atts) === true || $settings->method === 'standard' && Crawler::isBot()) {
             return $content;
         }
 
-        if (!is_single()) {
+        if (!is_singular()) {
+
             return '';
         }
 
@@ -68,6 +70,7 @@ class Shortcode extends AbstractShortcode
             $view->addData([
                 'restrictedContent' => base64_encode($content),
                 'options' => base64_encode(json_encode(array_merge($atts, ['cookieName' => $settings->getCookieName(), 'cookieDomain' => Cookie::getDomain()]))),
+                'c' => self::$count,
             ]);
         } else {
             $view->addData([
@@ -77,6 +80,7 @@ class Shortcode extends AbstractShortcode
                 'postData' => wp_unslash($_POST ?? []), // phpcs:ignore WordPress.Security.NonceVerification.Missing
             ]);
         }
+
         $markup = $view->compile('shortcode/shortcode-' . $settings->method);
 
         // remove the attribute
