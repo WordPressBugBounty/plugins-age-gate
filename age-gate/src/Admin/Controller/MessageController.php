@@ -41,13 +41,26 @@ class MessageController extends AbstractController
 
     protected function store()
     {
+        $_POST['ag_settings'] = wp_unslash($this->sanitizeHtml($_POST['ag_settings']));
+
+        parent::store();
+    }
+
+    protected function sanitizeHtml($array)
+    {
         $converter = new HtmlConverter();
-        foreach ($_POST['ag_settings'] ?? [] as $key => $setting) {
-            $_POST['ag_settings'][$key] = $converter->convert(html_entity_decode($setting));
+        foreach ($array ?? [] as $key => $setting) {
+
+            if (is_array($setting)) {
+                $array[$key] = $this->sanitizeHtml($setting);
+            } else {
+
+                $array[$key] = $converter->convert(html_entity_decode($setting));
+            }
 
         }
 
-        parent::store();
+        return $array;
     }
 
     protected function rules() : array
