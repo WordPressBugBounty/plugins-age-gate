@@ -25,7 +25,9 @@ class ViewController
 
     public function __construct($settings = null, $content = null)
     {
-        $theme = is_dir(get_template_directory() . '/age-gate') ? get_template_directory() . '/age-gate' : $this->empty;
+
+        $theme = is_dir(get_stylesheet_directory() . '/age-gate') ? get_stylesheet_directory() . '/age-gate' : $this->empty;
+
         $settings = Settings::getInstance();
 
         $map = [
