@@ -68,7 +68,6 @@ trait ClassNames
             'value' => 1
         ],
         'age-gate-remember-text' => [
-            'type' => 'checkbox',
             'class' => 'age-gate{element}remember-text',
         ],
         'age-gate-submit-section' => [

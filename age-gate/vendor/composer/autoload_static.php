@@ -22,7 +22,7 @@ class ComposerStaticInit0d51a6ea0dd41867acadae74515c5b51
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -30,47 +30,47 @@ class ComposerStaticInit0d51a6ea0dd41867acadae74515c5b51
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'StringTemplate\\' => 15,
         ),
-        'R' => 
+        'R' =>
         array (
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
         ),
-        'L' => 
+        'L' =>
         array (
             'League\\Plates\\' => 14,
             'League\\HTMLToMarkdown\\' => 22,
             'League\\Config\\' => 14,
             'League\\CommonMark\\' => 18,
         ),
-        'J' => 
+        'J' =>
         array (
             'Jaybizzle\\CrawlerDetect\\' => 24,
             'Jawira\\CaseConverter\\' => 21,
         ),
-        'I' => 
+        'I' =>
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Contracts\\' => 21,
         ),
-        'D' => 
+        'D' =>
         array (
             'Dflydev\\DotAccessData\\' => 22,
         ),
-        'C' => 
+        'C' =>
         array (
             'CaseConverter\\' => 14,
         ),
-        'B' => 
+        'B' =>
         array (
             'Brick\\Math\\' => 11,
         ),
-        'A' => 
+        'A' =>
         array (
             'Asylum\\Validation\\' => 18,
             'Asylum\\Utility\\' => 15,
@@ -83,125 +83,125 @@ class ComposerStaticInit0d51a6ea0dd41867acadae74515c5b51
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php81\\' => 
+        'Symfony\\Polyfill\\Php81\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'StringTemplate\\' => 
+        'StringTemplate\\' =>
         array (
             0 => __DIR__ . '/..' . '/nicmart/string-template/src/StringTemplate',
         ),
-        'Ramsey\\Uuid\\' => 
+        'Ramsey\\Uuid\\' =>
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
         ),
-        'Ramsey\\Collection\\' => 
+        'Ramsey\\Collection\\' =>
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
-        'Psr\\SimpleCache\\' => 
+        'Psr\\SimpleCache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\EventDispatcher\\' => 
+        'Psr\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'League\\Plates\\' => 
+        'League\\Plates\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/plates/src',
         ),
-        'League\\HTMLToMarkdown\\' => 
+        'League\\HTMLToMarkdown\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/html-to-markdown/src',
         ),
-        'League\\Config\\' => 
+        'League\\Config\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/config/src',
         ),
-        'League\\CommonMark\\' => 
+        'League\\CommonMark\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
         ),
-        'Jaybizzle\\CrawlerDetect\\' => 
+        'Jaybizzle\\CrawlerDetect\\' =>
         array (
             0 => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src',
         ),
-        'Jawira\\CaseConverter\\' => 
+        'Jawira\\CaseConverter\\' =>
         array (
             0 => __DIR__ . '/..' . '/jawira/case-converter/src',
         ),
-        'Illuminate\\Support\\' => 
+        'Illuminate\\Support\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/collections',
             1 => __DIR__ . '/..' . '/illuminate/macroable',
         ),
-        'Illuminate\\Contracts\\' => 
+        'Illuminate\\Contracts\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/contracts',
         ),
-        'Dflydev\\DotAccessData\\' => 
+        'Dflydev\\DotAccessData\\' =>
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
         ),
-        'CaseConverter\\' => 
+        'CaseConverter\\' =>
         array (
             0 => __DIR__ . '/..' . '/joachim-n/case-converter',
         ),
-        'Brick\\Math\\' => 
+        'Brick\\Math\\' =>
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'Asylum\\Validation\\' => 
+        'Asylum\\Validation\\' =>
         array (
             0 => __DIR__ . '/..' . '/asylum/validation/src',
         ),
-        'Asylum\\Utility\\' => 
+        'Asylum\\Utility\\' =>
         array (
             0 => __DIR__ . '/..' . '/asylum/utility/src',
         ),
-        'Asylum\\Common\\' => 
+        'Asylum\\Common\\' =>
         array (
             0 => __DIR__ . '/..' . '/asylum/common/src',
         ),
-        'AgeGate\\Utility\\' => 
+        'AgeGate\\Utility\\' =>
         array (
             0 => __DIR__ . '/..' . '/agegate/utility/src',
         ),
-        'AgeGate\\Common\\' => 
+        'AgeGate\\Common\\' =>
         array (
             0 => __DIR__ . '/..' . '/agegate/common/src',
         ),
-        'AgeGate\\' => 
+        'AgeGate\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'Adbar\\' => 
+        'Adbar\\' =>
         array (
             0 => __DIR__ . '/..' . '/adbario/php-dot-notation/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
+        'P' =>
         array (
-            'Parsedown' => 
+            'Parsedown' =>
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',
             ),

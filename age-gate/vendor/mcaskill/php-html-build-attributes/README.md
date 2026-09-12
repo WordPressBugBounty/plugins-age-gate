@@ -1,6 +1,6 @@
 # html_build_attributes
 
-> PHP 5 >= 5.4, PHP 7, PHP 8
+> PHP 7 >= 7.1, PHP 8
 
 Generate a string of HTML attributes.
 
@@ -23,7 +23,7 @@ breaking changes may occur between major releases.
 ## API
 
 ```php
-html_build_attributes( array|object $attr [, callable $callback = null ] ) : string
+html_build_attributes( array|object $attr [, ?callable $callback = null ] ) : string
 ```
 
 ### Parameters
