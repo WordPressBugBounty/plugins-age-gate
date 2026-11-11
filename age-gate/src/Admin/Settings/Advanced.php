@@ -9,7 +9,7 @@ trait Advanced
         return [
             [
                 'title' => __('Caching / Performance', 'age-gate'),
-                'model' => ['method'],
+                'model' => ['method', 'noscript'],
                 'subtitle' => __('If you have a caching solution, it is best to use a JavaScript triggered version of the age gate as this won\'t be adversely affected by the cache. If you don\'t have caching, the standard method is recommended.', 'age-gate'),
                 'fields' => [
                     'method' => [
@@ -41,6 +41,29 @@ trait Advanced
                         ],
                         'condition' => [
                             'x-show' => "method == 'js'"
+                        ],
+                    ],
+                    'noscript' => [
+                        'label' => __('Add noscript overlay', 'age-gate'),
+                        'type' => 'checkbox',
+                        'default' => false,
+                        'subtext' => __('Add a noscript tag that blocks content if javascript is disabled in the browser', 'age-gate'),
+                        'condition' => [
+                            'x-show' => "method == 'js'"
+                        ],
+                        'attributes' => [
+                            'x-model' => 'noscript',
+                        ]
+                    ],
+                    'noscript_message' => [
+                        'type' => 'text',
+                        'label' => __('No script message', 'age-gate'),
+                        'default' => __('Please enable Javascript to continue', 'age-gate'),
+                        'attributes' => [
+                            'class' => 'regular-text',
+                        ],
+                        'condition' => [
+                            'x-show' => "method == 'js' && noscript == true"
                         ],
                     ],
                     'disable_ajax_fallback' => [

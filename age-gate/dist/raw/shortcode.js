@@ -2150,17 +2150,18 @@
             element.parentNode.replaceChild(doc.body.firstChild, element);
         }, shortcode_submit = function() {
             var _ref = _asyncToGenerator(_regeneratorRuntime().mark((function _callee(form, submitter) {
-                var formData, asString, response, data;
+                var formData, _window, uri, asString, response, data;
                 return _regeneratorRuntime().wrap((function(_context) {
                     for (;;) switch (_context.prev = _context.next) {
                       case 0:
                         return (formData = new FormData(form)).append("age_gate[confirm]", submitter.value), 
-                        asString = new URLSearchParams(formData).toString(), _context.next = 5, axios_default().get("/wp-json/age-gate/v3/check?".concat(asString));
+                        _window = window, uri = _window.age_gate_scode.uri, asString = new URLSearchParams(formData).toString(), 
+                        _context.next = 6, axios_default().get("".concat(uri, "?").concat(asString));
 
-                      case 5:
+                      case 6:
                         return response = _context.sent, data = response.data, _context.abrupt("return", data);
 
-                      case 8:
+                      case 9:
                       case "end":
                         return _context.stop();
                     }

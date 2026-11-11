@@ -128,6 +128,7 @@ abstract class AbstractController
         }
 
         $method = sprintf('get%sFields', ucfirst($this->getName()));
+
         $dot = Arr::dot($this->$method());
 
         $default = [];
@@ -135,6 +136,7 @@ abstract class AbstractController
         $values = Arr::where($dot, function ($value, $key) {
             return substr($key, -8) === '.default';
         });
+
 
         foreach ($values as $key => $value) {
             $exp = '/(?:[0-9]).fields.([a-z_.]+).default/';
@@ -157,6 +159,27 @@ abstract class AbstractController
         }
 
         $merge = Arr::undot($validator->filter(Arr::dot($merge), $filters));
+
+        $fieldKeys = [];
+        foreach ($this->$method() as $section) {
+            foreach ($section['fields'] as $key => $d) {
+                if ($d['fields'] ?? false) {
+                    foreach ($d['fields'] as $k => $c) {
+                        $fieldKeys[] = sprintf('%s.%s', $key, $k);
+                    }
+                    continue;
+                }
+
+                $fieldKeys[] = $key;
+            }
+            // $fieldKeys = array_merge($fieldKeys, array_keys($section['fields'] ?? []));
+        }
+
+        foreach ($fieldKeys as $key) {
+            foreach ($language->getLanguages() as $code => $lang) {
+                $fieldKeys[] = $code . '.' . $key;
+            }
+        }
 
         if ($rules = $this->rules()) {
 
@@ -183,7 +206,16 @@ abstract class AbstractController
             }
         }
 
-        // dd($merge);
+        $merge = Arr::dot($merge);
+
+
+        foreach (array_keys($merge) as $key) {
+            if (!in_array($key, $fieldKeys)) {
+                unset($merge[$key]);
+            }
+        }
+
+        $merge = Arr::undot($merge);
         update_option(static::OPTION, $validator->sanitize($merge));
 
         // allow controllers to do more than the base save

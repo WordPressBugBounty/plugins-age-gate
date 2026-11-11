@@ -84,7 +84,17 @@ class Template
 
     public static function fields($fields)
     {
-        View::render('theme::partials/form/sections/' . $fields);
+        switch ($fields) {
+            case 'buttons':
+                View::render('theme::partials/form/sections/buttons');
+                break;
+            case 'inputs':
+                View::render('theme::partials/form/sections/inputs');
+                break;
+            case 'selects':
+                View::render('theme::partials/form/sections/selects');
+                break;
+        }
     }
 
     public static function remember()

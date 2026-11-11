@@ -24,6 +24,11 @@ class JsController extends AbstractController implements ControllerInterface
                 wp_enqueue_script('age-gate-hooks', $path . '/hooks.js', [], AGE_GATE_VERSION, !$this->settings->inHeader);
             }
 
+            if ($this->settings->noscript) {
+                $path = sprintf('%s%s%s', AGE_GATE_URL, 'dist', ($this->settings->rawAssets ? '/raw' : ''));
+                wp_enqueue_style('age-gate-noscript', $path . '/noscript.css', [], AGE_GATE_VERSION);
+            }
+
         }, 1);
     }
 
@@ -47,7 +52,7 @@ class JsController extends AbstractController implements ControllerInterface
                 'rechallenge' => $this->settings->rechallenge,
                 'error' => $this->settings->errorFailed,
                 'generic' => $this->settings->errorGeneric,
-                'uri' => rest_url('/age-gate/v3/check'),
+                'uri' => get_rest_url(get_current_blog_id(), '/age-gate/v3/check'),
                 'useLocalStorage' => $this->settings->useLocalStorage,
             ];
 

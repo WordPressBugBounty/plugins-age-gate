@@ -6,13 +6,15 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
-    '23c18046f52bef3eea034657bafda50f' => $vendorDir . '/symfony/polyfill-php81/bootstrap.php',
-    '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
+    '9d2b9fc6db0f153a0a149fefb182415e' => $vendorDir . '/symfony/polyfill-php84/bootstrap.php',
+    '606a39d89246991a373564698c2d8383' => $vendorDir . '/symfony/polyfill-php85/bootstrap.php',
+    '2c2415ec15363ede1bff13a287462ba1' => $vendorDir . '/symfony/polyfill-php86/bootstrap.php',
+    '23f09fe3194f8c2f70923f90d6702129' => $vendorDir . '/illuminate/collections/functions.php',
     '60799491728b879e74601d83e38b2cad' => $vendorDir . '/illuminate/collections/helpers.php',
     'e39a8b23c42d4e1452234d762b03835a' => $vendorDir . '/ramsey/uuid/src/functions.php',
     'd767e4fc2dc52fe66584ab8c6684783e' => $vendorDir . '/adbario/php-dot-notation/src/helpers.php',
     '6e3fae29631ef280660b3cdad06f25a8' => $vendorDir . '/symfony/deprecation-contracts/function.php',
+    'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'ef55b063b9ee0ba7e3e1dfb9a6dae703' => $vendorDir . '/mcaskill/php-html-build-attributes/Function.HTML-Build-Attributes.php',
     '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     '8fa4d0d61f1379050068d667d2410a31' => $baseDir . '/src/Functions/Content.php',

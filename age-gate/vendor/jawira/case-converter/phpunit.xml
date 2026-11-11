@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
+         forceCoversAnnotation="true"
+         beStrictAboutCoversAnnotation="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         colors="true"
+         failOnWarning="true"
+         failOnRisky="true"
+         failOnSkipped="true"
+         failOnEmptyTestSuite="true"
+         failOnIncomplete="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="true"
+         stopOnRisky="true"
+         stopOnDefect="true"
+         stopOnWarning="true"
+         stopOnIncomplete="true"
+         stopOnSkipped="true"
+         stopOnError="true">
+
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <report>
+      <clover outputFile="./clover.xml"/>
+      <html outputDirectory="./resources/coverage-html/"/>
+      <text outputFile="php://stdout" showUncoveredFiles="true"/>
+    </report>
+  </coverage>
+
+  <testsuite name="default">
+    <directory>./tests/phpunit</directory>
+  </testsuite>
+
+  <logging/>
+
+</phpunit>

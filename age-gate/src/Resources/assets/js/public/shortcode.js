@@ -17,8 +17,9 @@ const submit = async (form, submitter) => {
     const formData = new FormData(form);
     formData.append('age_gate[confirm]', submitter.value);
 
+    const { age_gate_scode: { uri } } = window;
     const asString = new URLSearchParams(formData).toString();
-    const response = await axios.get(`/wp-json/age-gate/v3/check?${asString}`);
+    const response = await axios.get(`${uri}?${asString}`);
 
     const { data } = response;
     return data;

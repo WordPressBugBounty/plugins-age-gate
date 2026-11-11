@@ -6,11 +6,11 @@
     "license": "MIT",
     "homepage": "https://asylum.digital",
     "require": {
-        "php": "^7.4|^8.0",
-        "illuminate/collections": "^8.46",
-        "league/plates": "^3.4",
-        "ramsey/uuid": "^4.2",
-        "jaybizzle/crawler-detect": "^1.2"
+        "php": "^8.3",
+        "illuminate/collections": "^13.40",
+        "jaybizzle/crawler-detect": "^1.4",
+        "league/plates": "^3.6",
+        "ramsey/uuid": "^4.9"
     },
     "autoload": {
         "psr-4": {

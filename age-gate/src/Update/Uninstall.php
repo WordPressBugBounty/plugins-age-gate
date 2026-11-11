@@ -37,6 +37,12 @@ class Uninstall
             }
         }
 
+        // delete encryption keys
+        delete_option('age_gate_legacy_key_until');
+        delete_option('age_gate_encrypt_key');
+        delete_option('age_gate_encrypt_secret');
+
+
         // delete version
         delete_option('age_gate_version');
     }

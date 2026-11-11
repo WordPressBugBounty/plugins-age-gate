@@ -1,0 +1,1 @@
+.age-gate-noscript{-webkit-backdrop-filter:blur(var(--ag-blur));backdrop-filter:blur(var(--ag-blur));background:var(--ag-background-color,#fff);display:flex;inset:0;position:fixed;z-index:9999999}.age-gate-noscript>div{background:var(--ag-form-background,#fff);margin:auto;max-width:var(--ag-form-max-width,500px);padding:var(--ag-form-padding,20px);width:100%}

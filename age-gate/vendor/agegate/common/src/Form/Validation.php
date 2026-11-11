@@ -9,7 +9,9 @@ class Validation extends Validator
 {
     protected function filter_decode_age($value, array $params = [])
     {
-        return (int) (new Encrypt)->decrypt($value);
+        $age = (new Encrypt)->decrypt($value);
+
+        return $age === '' ? '' : (int) $age;
     }
 
     protected function filter_pad($value, array $params)

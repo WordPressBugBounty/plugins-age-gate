@@ -26,13 +26,16 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": "^8.2",
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "behat/behat": "^3.0",
-    "phpstan/phpstan": "^v2",
-    "phpunit/phpunit": "^9.0"
+    "behat/behat": "^4.0",
+    "friendsofphp/php-cs-fixer": "^3.95",
+    "jawira/annotation-updater": "^1.1",
+    "jawira/skeleton": "^2.33",
+    "phpstan/phpstan": "^v2.3",
+    "phpunit/phpunit": "^9.6"
   },
   "suggest": {
     "pds/skeleton": "PHP Package Development Standards",
@@ -45,6 +48,12 @@
   "autoload": {
     "psr-4": {
       "Jawira\\CaseConverter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jawira\\CaseConverterBehat\\": "tests/behat/bootstrap",
+      "Jawira\\CaseConverterTests\\": "tests/phpunit"
     }
   }
 }

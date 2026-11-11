@@ -81,7 +81,9 @@ class Shortcode extends AbstractShortcode
             ]);
         }
 
-        $markup = $view->compile('shortcode/shortcode-' . $settings->method);
+        $template = sprintf('shortcode/shortcode-%s', $settings->method === 'js' ? 'js' : 'standard');
+
+        $markup = $view->compile($template, []);
 
         // remove the attribute
         return $markup;

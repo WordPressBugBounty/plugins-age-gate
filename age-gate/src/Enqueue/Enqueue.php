@@ -41,7 +41,7 @@ class Enqueue
                     'age-gate-admin',
                     'ag_admin',
                     [
-                        'rest' => rest_url( 'age-gate/v3/admin/terms'),
+                        'rest' => get_rest_url(get_current_blog_id(), 'age-gate/v3/admin/terms'),
                         'nonce' => wp_create_nonce('wp_rest'),
                     ]
                 );
@@ -63,6 +63,10 @@ class Enqueue
         ]);
 
         wp_register_script('age-gate-shortcode', $path . '/shortcode.js', [], AGE_GATE_VERSION, true);
+
+        wp_localize_script('age-gate-shortcode', 'age_gate_scode', [
+            'uri' => get_rest_url(get_current_blog_id(), '/age-gate/v3/check'),
+        ]);
 
         if ($settings->enqueueCss) {
             wp_register_style('age-gate', $path . '/main.css', [], AGE_GATE_VERSION);

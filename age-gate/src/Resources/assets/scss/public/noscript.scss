@@ -1,0 +1,16 @@
+.age-gate-noscript {
+    position: fixed;
+    inset: 0;
+    background: var(--ag-background-color, #fff);
+    backdrop-filter: blur(var(--ag-blur));
+    z-index: 9999999;
+    display: flex;
+
+    > div {
+        background: var(--ag-form-background, #fff);
+        margin: auto;
+        padding: var(--ag-form-padding, 20px);
+        max-width: var(--ag-form-max-width, 500px);
+        width: 100%;
+    }
+}

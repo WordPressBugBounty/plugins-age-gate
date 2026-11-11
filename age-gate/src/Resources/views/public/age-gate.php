@@ -1,4 +1,7 @@
-<?php $this->layout('layouts/' . $settings->method);?>
+<?php
+    $layout = $settings->method === 'standard' ? 'standard' : 'js';
+    $this->layout('layouts/' . $layout);
+?>
 <?php //$this->layout('layouts/standard');?>
 
 <div <?php echo $this->attr('age-gate-wrapper'); ?>><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

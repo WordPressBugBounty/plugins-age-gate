@@ -102,6 +102,10 @@ class Activate
             wp_clear_scheduled_hook('age_gate/cron_options');
         }
 
+        if (get_option('age_gate_version') && !get_option('age_gate_legacy_key_until', false)) {
+            add_option('age_gate_legacy_key_until', time() + 30 * DAY_IN_SECONDS);
+        }
+
         update_option('age_gate_version', AGE_GATE_VERSION);
     }
 

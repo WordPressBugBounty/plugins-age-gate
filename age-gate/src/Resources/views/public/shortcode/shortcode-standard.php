@@ -8,7 +8,21 @@
             <?php endif ?>
             <?php
                 try {
-                    $this->insert('partials/form/sections/' . $settings->inputType);
+                    switch ($settings->inputType) {
+                        case 'inputs':
+                            $this->insert('partials/form/sections/inputs');
+                            break;
+                        case 'buttons':
+                            $this->insert('partials/form/sections/buttons');
+                            break;
+                        case 'selects':
+                            $this->insert('partials/form/sections/selects');
+                            break;
+                        default:
+                            throw new \Exception('Unknown type');
+                            break;
+                    }
+
                 } catch (Exception $e) {
                     $settings->set('inputType', 'buttons');
                     $this->insert('partials/form/sections/buttons');
@@ -30,7 +44,7 @@
             <?php endif; ?>
             <input type="hidden" name="age_gate[age]" value="<?php echo esc_attr($encrypt->encrypt($content->getAge())) ?>" />
             <input type="hidden" name="age_gate[shortcode]" value="<?php echo esc_attr($encrypt->encrypt($settings->inputType)) ?>" />
-            <input type="hidden" name="ag_sc" value="<?php echo esc_attr($c) ?>" />
+            <input type="hidden" name="ag_sc" value="<?php echo esc_attr($encrypt->encrypt(get_the_ID() . '|' . $c)) ?>" />
         </div>
     </form>
 </div>

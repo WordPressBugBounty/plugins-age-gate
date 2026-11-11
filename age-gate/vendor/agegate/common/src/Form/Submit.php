@@ -59,7 +59,24 @@ class Submit
 
 
         if ($this->shortcode) {
-            $this->inputType = (new Encrypt())->decrypt($this->shortcode);
+
+            $sc = (new Encrypt())->decrypt($this->data['ag_sc']);
+            $scInstance = array_filter(explode('|', $sc), 'trim');
+            list($id, $instance) = $scInstance;
+
+            $post = get_post($id);
+
+
+            $params = \AgeGate\Common\Helpers\Shortcode::getShortcodeParams($post->post_content, 'age-gate');
+            if ($params[$instance - 1]['type'] ?? false) {
+                $this->inputType = match ($params[$instance - 1]['type']) {
+                    'buttons' => 'buttons',
+                    'selects' => 'selects',
+                    default => 'inputs',
+                };
+
+            }
+
         }
 
 
@@ -83,7 +100,6 @@ class Submit
         }
 
         $data = $this->validation->run($this->data);
-
         if ($this->validation->errors()) {
             do_action(
                 'age_gate/submission/failed',

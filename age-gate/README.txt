@@ -2,10 +2,10 @@
 Contributors: philsbury
 Tags: age verification, age gate, adults-only, age restriction, age verify
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40wordpressagegate%2ecom&lc=GB&item_name=Age%20Gate&item_number=Age%20Gate%20Donation&no_note=0&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
-Requires at least: 6.0.0
-Requires PHP: 7.4
+Requires at least: 6.6.0
+Requires PHP: 8.3
 Tested up to: 7.1
-Stable tag: 3.7.3
+Stable tag: 3.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,16 @@ From version 1.4.0 those using caching can select the "Cache Bypass" option to a
 6. Manage what users can change Age Gate's setting, restrict posts and exclude settings from certain post types.
 
 == Changelog ==
+
+= 3.8.1 =
+* Fixed - Submission error on subfolder based multisites
+
+= 3.8.0 =
+* Changed - Minimum PHP version to 8.3
+* Fixed - Oversized flag icons in multilingual sites
+* Fixed - Bug where user could pass with age of 0
+* Changed - Shortcode method no longer passed in form from Md. Ripon's feedback
+* Security - Fixed Path Traversal in shortcode.
 
 = 3.7.3 =
 * Fixed - Incorrect type attribute on age-gate-remember-text
